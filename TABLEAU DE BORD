@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de Bord Sûreté CI&BF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+        }
+
+        header {
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Tableau de Bord Sûreté CI&BF</h1>
+    <p>Rapport Power BI publié via Power BI Service</p>
+</header>
+
+<div class="container">
+    <iframe 
+        title="TABLEAU DE BORD SURETE CI&BF"
+        src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+        allowfullscreen="true">
+    </iframe>
+</div>
+
+<footer>
+    © 2026 – Tableau de bord Power BI
+</footer>
+
+</body>
+</html>
