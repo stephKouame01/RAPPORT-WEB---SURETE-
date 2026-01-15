@@ -5,91 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accueil Power BI</title>
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-    }
+body, html { margin: 0; padding: 0; font-family: Arial; height: 100%; overflow: hidden; }
 
-    .video-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-    }
+.video-container {
+    width: 100%; height: 100%; position: relative;
+}
 
-    .video-background video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+video {
+    width: 100%; height: 100%; object-fit: cover;
+}
 
-    .content {
-        position: relative;
-        z-index: 1;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-        background-color: rgba(0,0,0,0.4); /* rend le texte lisible */
-    }
+.overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: rgba(0,0,0,0.4); color: white; text-align: center;
+}
 
-    .report-button {
-        background: rgba(255,255,255,0.9);
-        color: #000;
-        padding: 20px 40px;
-        margin: 15px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        transition: transform 0.2s;
-    }
+button {
+    padding: 20px 40px; margin: 10px; font-size: 18px; cursor: pointer; border-radius: 10px;
+    border: none; background-color: rgba(255,255,255,0.9); color: black;
+}
 
-    .report-button:hover {
-        transform: scale(1.05);
-    }
-
+iframe {
+    width: 100%; height: 100%; border: none; display: none;
+}
 </style>
 </head>
 <body>
 
-<!-- Vidéo de fond -->
-<div class="video-background">
+<div class="video-container" id="videoContainer">
     <video autoplay muted loop>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo.
     </video>
-</div>
-
-<div class="content">
-    <h1>Bienvenue sur le portail des rapports</h1>
-    <p>Cliquez sur un rapport pour l’ouvrir</p>
-
-    <div>
-        <div class="report-button" onclick="openReport(1)">Rapport 1</div>
-        <div class="report-button" onclick="openReport(2)">Rapport 2</div>
-        <div class="report-button" onclick="openReport(3)">Rapport 3</div>
+    <div class="overlay">
+        <h1>Bienvenue sur le portail</h1>
+        <p>Cliquez sur un rapport pour l’afficher</p>
+        <button onclick="loadReport(1)">Rapport 1</button>
+        <button onclick="loadReport(2)">Rapport 2</button>
+        <button onclick="loadReport(3)">Rapport 3</button>
     </div>
 </div>
 
+<iframe id="reportFrame"></iframe>
+
 <script>
-    function openReport(reportId) {
-        // Redirection vers le rapport Power BI correspondant
-        let urls = {
-            1: 'https://app.powerbi.com/reportEmbed?reportId=1',
-            2: 'https://app.powerbi.com/reportEmbed?reportId=2',
-            3: 'https://app.powerbi.com/reportEmbed?reportId=3'
-        };
-        window.location.href = urls[reportId];
-    }
+function loadReport(id) {
+    let urls = {
+        1: 'https://app.powerbi.com/reportEmbed?reportId=1',
+        2: 'https://app.powerbi.com/reportEmbed?reportId=2',
+        3: 'https://app.powerbi.com/reportEmbed?reportId=3'
+    };
+    // cacher la vidéo
+    document.getElementById('videoContainer').style.display = 'none';
+    // afficher l'iframe avec le rapport
+    let iframe = document.getElementById('reportFrame');
+    iframe.src = urls[id];
+    iframe.style.display = 'block';
+}
 </script>
 
 </body>
