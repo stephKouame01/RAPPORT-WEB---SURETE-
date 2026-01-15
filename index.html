@@ -7,56 +7,54 @@
 
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            background: #f4f6f8;
-            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
         }
 
         header {
-            background: #1f2937;
+            background-color: #1f2937;
             color: white;
-            padding: 20px;
-        }
-
-        h1 {
-            margin: 0;
+            padding: 15px;
+            text-align: center;
         }
 
         .tabs {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
             gap: 10px;
+            padding: 15px;
+            background: #e5e7eb;
             flex-wrap: wrap;
         }
 
         .tabs button {
-            padding: 10px 25px;
-            font-size: 16px;
-            border-radius: 5px;
+            padding: 10px 20px;
             border: none;
-            background-color: #1f2937;
+            border-radius: 5px;
+            background: #1f2937;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 15px;
         }
 
         .tabs button.active {
-            background-color: #2563eb;
+            background: #2563eb;
         }
 
         .tabs button:hover {
-            background-color: #374151;
+            background: #374151;
+        }
+
+        #rapportContainer {
+            width: 100%;
+            height: calc(100vh - 130px);
         }
 
         iframe {
-            width: 90%;
-            height: 80vh;
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -72,43 +70,28 @@
     <button onclick="changerRapport('videosurveillance', this)">CCTV SITARAIL</button>
 </div>
 
-<iframe id="rapportIframe" allowfullscreen></iframe>
+<div id="rapportContainer">
+    <iframe id="rapportIframe" allowfullscreen></iframe>
+</div>
 
 <script>
     const rapports = {
-        niveauAlerte: `
-            <iframe title="Niveau d'Alerte"
-                src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-                frameborder="0" allowfullscreen="true"
-                style="width:100%; height:100%;">
-            </iframe>`,
-
-        tableauDeBord: `
-            <iframe title="TABLEAU DE BORD SURETE CI&BF"
-                src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-                frameborder="0" allowfullscreen="true"
-                style="width:100%; height:100%;">
-            </iframe>`,
-
-        videosurveillance: `
-            <iframe title="RAPPORT CCTV SITARAIL"
-                src="https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-                frameborder="0" allowfullscreen="true"
-                style="width:100%; height:100%;">
-            </iframe>`
+        niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+        tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+        videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
     };
 
-    const iframeContainer = document.getElementById('rapportIframe');
+    const iframe = document.getElementById('rapportIframe');
     const buttons = document.querySelectorAll('.tabs button');
 
     function changerRapport(rapportKey, bouton) {
-        iframeContainer.srcdoc = rapports[rapportKey];
+        iframe.src = rapports[rapportKey];
 
         buttons.forEach(btn => btn.classList.remove('active'));
         bouton.classList.add('active');
     }
 
-    // Rapport affiché par défaut
+    // Chargement par défaut
     changerRapport('niveauAlerte', document.querySelector('.tabs button'));
 </script>
 
