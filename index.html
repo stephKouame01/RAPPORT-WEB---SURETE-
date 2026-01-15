@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Portail des Rapports Sûreté</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +28,7 @@
             justify-content: center;
             margin: 20px 0;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .tabs button {
@@ -41,7 +43,7 @@
         }
 
         .tabs button.active {
-            background-color: #2563eb; /* bleu pour actif */
+            background-color: #2563eb;
         }
 
         .tabs button:hover {
@@ -65,37 +67,49 @@
 </header>
 
 <div class="tabs">
-    <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
-    <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+    <button class="active" onclick="changerRapport('niveauAlerte', this)">Niveau d'Alerte</button>
+    <button onclick="changerRapport('tableauDeBord', this)">Tableau de bord Sûreté</button>
+    <button onclick="changerRapport('videosurveillance', this)">CCTV SITARAIL</button>
 </div>
 
-<iframe id="rapportIframe" src="" allowfullscreen></iframe>
+<iframe id="rapportIframe" allowfullscreen></iframe>
 
 <script>
-    // Contenu des iframes pour chaque rapport
     const rapports = {
-        niveauAlerte: `<iframe title="Niveau d'Alerte" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`,
+        niveauAlerte: `
+            <iframe title="Niveau d'Alerte"
+                src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+                frameborder="0" allowfullscreen="true"
+                style="width:100%; height:100%;">
+            </iframe>`,
 
-        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE CI&BF" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`
+        tableauDeBord: `
+            <iframe title="TABLEAU DE BORD SURETE CI&BF"
+                src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+                frameborder="0" allowfullscreen="true"
+                style="width:100%; height:100%;">
+            </iframe>`,
+
+        videosurveillance: `
+            <iframe title="RAPPORT CCTV SITARAIL"
+                src="https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+                frameborder="0" allowfullscreen="true"
+                style="width:100%; height:100%;">
+            </iframe>`
     };
 
     const iframeContainer = document.getElementById('rapportIframe');
     const buttons = document.querySelectorAll('.tabs button');
 
-    function changerRapport(rapportKey) {
+    function changerRapport(rapportKey, bouton) {
         iframeContainer.srcdoc = rapports[rapportKey];
 
-        // Gérer le style actif
         buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
+        bouton.classList.add('active');
     }
 
-    // Affiche le rapport par défaut au chargement
-    changerRapport('niveauAlerte');
+    // Rapport affiché par défaut
+    changerRapport('niveauAlerte', document.querySelector('.tabs button'));
 </script>
 
 </body>
