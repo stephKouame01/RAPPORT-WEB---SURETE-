@@ -14,12 +14,14 @@ body, html {
     background-color: #111;
 }
 
-/* Vidéo YouTube en fond */
+/* Conteneur vidéo */
 .video-container {
     width: 100%; height: 100%; position: relative;
     z-index: 0;
+    transition: opacity 1s ease;
 }
 
+/* Vidéo YouTube */
 .video-container iframe {
     width: 100%;
     height: 100%;
@@ -27,7 +29,7 @@ body, html {
     border: none;
 }
 
-/* Contenu overlay */
+/* Overlay contenu */
 .overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -36,6 +38,7 @@ body, html {
     color: white;
     text-align: center;
     z-index: 1;
+    transition: opacity 1s ease;
 }
 
 .overlay h1 {
@@ -83,14 +86,43 @@ body, html {
     color: #555;
 }
 
-iframe#reportFrame {
-    width: 100%; height: 100%; border: none; display: none;
+/* Iframe rapport */
+#iframe-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: none;
+    z-index: 2;
+}
+
+#iframe-container iframe {
+    width: 100%; height: 100%; border: none;
+}
+
+/* Bouton retour */
+#backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.9);
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: none;
+}
+
+#backButton:hover {
+    background: rgba(255,255,255,1);
 }
 </style>
 </head>
 <body>
 
-<!-- Vidéo YouTube en fond (entière) -->
+<!-- Vidéo en fond -->
 <div class="video-container" id="videoContainer">
     <iframe id="introVideo"
         src="https://www.youtube.com/embed/3a-VCr6WeeI?autoplay=1&mute=1&loop=1&playlist=3a-VCr6WeeI"
@@ -98,7 +130,7 @@ iframe#reportFrame {
         allow="autoplay; encrypted-media" allowfullscreen>
     </iframe>
 
-    <div class="overlay">
+    <div class="overlay" id="overlay">
         <h1>Bienvenue sur SIATARAIL</h1>
         <p>Découvrez nos rapports et analyses du réseau ferroviaire</p>
         <div class="cards-container">
@@ -108,4 +140,59 @@ iframe#reportFrame {
             </div>
             <div class="report-card" onclick="loadReport(2)">
                 <h2>Flux de Trafic</h2>
-                <p>Visualisation des flux de trafic
+                <p>Visualisation des flux de trafic ferroviaire en temps réel.</p>
+            </div>
+            <div class="report-card" onclick="loadReport(3)">
+                <h2>Maintenance et Sécurité</h2>
+                <p>Suivi des opérations de maintenance et des incidents de sécurité.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container pour iframe rapport -->
+<div id="iframe-container">
+    <iframe id="reportFrame"></iframe>
+</div>
+
+<!-- Bouton retour -->
+<button id="backButton" onclick="backToVideo()">Retour à l'accueil</button>
+
+<script>
+function loadReport(id) {
+    const urls = {
+        1: 'https://app.powerbi.com/reportEmbed?reportId=1',
+        2: 'https://app.powerbi.com/reportEmbed?reportId=2',
+        3: 'https://app.powerbi.com/reportEmbed?reportId=3'
+    };
+    
+    // Fondu vidéo
+    document.getElementById('videoContainer').style.opacity = 0;
+    document.getElementById('overlay').style.opacity = 0;
+
+    setTimeout(() => {
+        document.getElementById('videoContainer').style.display = 'none';
+        // Afficher iframe avec le rapport
+        document.getElementById('iframe-container').style.display = 'block';
+        document.getElementById('reportFrame').src = urls[id];
+        // Afficher bouton retour
+        document.getElementById('backButton').style.display = 'block';
+    }, 1000); // délai pour fondu
+}
+
+function backToVideo() {
+    // Masquer iframe
+    document.getElementById('iframe-container').style.display = 'none';
+    document.getElementById('reportFrame').src = '';
+    document.getElementById('backButton').style.display = 'none';
+    // Afficher vidéo avec fondu
+    document.getElementById('videoContainer').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('videoContainer').style.opacity = 1;
+        document.getElementById('overlay').style.opacity = 1;
+    }, 50);
+}
+</script>
+
+</body>
+</html>
