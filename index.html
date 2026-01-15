@@ -90,10 +90,10 @@ iframe#reportFrame {
 </head>
 <body>
 
-<!-- Vidéo YouTube en fond (42s → 79s) -->
+<!-- Vidéo YouTube en fond (entière) -->
 <div class="video-container" id="videoContainer">
     <iframe id="introVideo"
-        src="https://www.youtube.com/embed/3a-VCr6WeeI?autoplay=1&mute=1&start=42&end=79&loop=1&playlist=3a-VCr6WeeI"
+        src="https://www.youtube.com/embed/3a-VCr6WeeI?autoplay=1&mute=1&loop=1&playlist=3a-VCr6WeeI"
         title="SIATARAIL" frameborder="0"
         allow="autoplay; encrypted-media" allowfullscreen>
     </iframe>
@@ -108,34 +108,4 @@ iframe#reportFrame {
             </div>
             <div class="report-card" onclick="loadReport(2)">
                 <h2>Flux de Trafic</h2>
-                <p>Visualisation des flux de trafic ferroviaire en temps réel.</p>
-            </div>
-            <div class="report-card" onclick="loadReport(3)">
-                <h2>Maintenance et Sécurité</h2>
-                <p>Suivi des opérations de maintenance et des incidents de sécurité.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Iframe pour charger les rapports après clic -->
-<iframe id="reportFrame"></iframe>
-
-<script>
-function loadReport(id) {
-    const urls = {
-        1: 'https://app.powerbi.com/reportEmbed?reportId=1',
-        2: 'https://app.powerbi.com/reportEmbed?reportId=2',
-        3: 'https://app.powerbi.com/reportEmbed?reportId=3'
-    };
-    // Masquer la vidéo et l'overlay
-    document.getElementById('videoContainer').style.display = 'none';
-    // Afficher l'iframe avec le rapport choisi
-    const iframe = document.getElementById('reportFrame');
-    iframe.src = urls[id];
-    iframe.style.display = 'block';
-}
-</script>
-
-</body>
-</html>
+                <p>Visualisation des flux de trafic
