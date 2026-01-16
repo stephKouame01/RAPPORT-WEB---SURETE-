@@ -3,149 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bienvenu Portail SURETE SITARAIL</title>
+<title>Portail des Rapports Sûreté</title>
+
 <style>
+    /* --- Style Global --- */
+    * {
+        box-sizing: border-box;
+    }
     body, html {
         margin: 0;
         padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        height: 100%;
-        overflow: hidden;
-        background: #000;
-    }
-
-    /* Vidéo de fond */
-    .video-bg {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        overflow: hidden;
-        z-index: -1;
-    }
-    .video-bg video {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #0d1117;
+        color: #e1e4e8;
+        overflow-x: hidden;
     }
 
-    .overlay {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5);
+    /* --- Section Hero (Accueil) --- */
+    .hero {
+        width: 100%;
+        height: 40vh;
+        min-height: 300px;
+        background: linear-gradient(135deg, #0f2027, #2c5364);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        color: white;
     }
-
-    .cards-container {
-        display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: 1200px;
-        margin-top: 30px;
+    .hero h1 {
+        font-size: 3rem;
+        margin: 0;
+        color: #ffffff;
     }
-
-    .report-card {
-        background: rgba(255,255,255,0.9);
-        width: 260px;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-        transition: .3s;
-        color: #111;
+    .hero p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        color: #cbd5e1;
     }
-    .report-card:hover {
-        transform: translateY(-6px) scale(1.05);
+    .hero .btn-container {
+        margin-top: 20px;
     }
-
-    #iframe-container {
-        display: none;
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: white;
-        z-index: 2;
-    }
-    #iframe-container iframe {
-        width: 100%; height: 100%; border: none;
-    }
-    #backButton {
-        display: none;
-        position: absolute;
-        top: 20px; left: 20px;
-        padding: 10px 18px;
+    .hero button {
+        padding: 12px 28px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
         background: #2563eb;
-        color: white;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin: 0 10px;
+    }
+    .hero button:hover {
+        background: #1e40af;
+    }
+
+    /* --- Tabs Section --- */
+    .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 25px 0;
+    }
+    .tabs button {
+        padding: 10px 22px;
+        font-size: 16px;
         border: none;
         border-radius: 6px;
+        background: #1f2937;
+        color: white;
         cursor: pointer;
+        transition: 0.3s;
+    }
+    .tabs button.active {
+        background: #2563eb;
+    }
+    .tabs button:hover {
+        background: #374151;
+    }
+
+    /* --- Iframe Section --- */
+    #rapportIframe {
+        width: 95%;
+        height: 65vh;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0px 4px 18px rgba(0,0,0,0.25);
+        margin: 20px auto;
+        display: block;
+        background: white;
+    }
+
+    /* --- Responsive Design --- */
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 2.2rem; }
+        .hero p { font-size: 1rem; }
+        .tabs button { font-size: 14px; padding: 8px 16px; }
     }
 </style>
+
 </head>
 <body>
 
-<!-- Vidéo de fond -->
-<div class="video-bg">
-    <video autoplay muted loop playsinline>
-        <source src="video/railway.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
-    </video>
-</div>
-
-<!-- Page d'accueil -->
-<div class="overlay" id="homePage">
-    <h1>Bienvenue sur le Portail SURETE SITARAIL</h1>
-    <p>Découvrez nos rapports</p>
-
-    <div class="cards-container">
-        <div class="report-card" onclick="loadReport('niveauAlerte')">
-            <h2>Niveau d’Alerte</h2>
-            <p>Analyse détaillée du réseau ferroviaire.</p>
-        </div>
-        <div class="report-card" onclick="loadReport('tableauDeBord')">
-            <h2>Tableau de bord</h2>
-            <p>Suivi général de la sûreté.</p>
-        </div>
-        <div class="report-card" onclick="loadReport('videosurveillance')">
-            <h2>Vidéosurveillance</h2>
-            <p>Rapport CCTV SITARAIL.</p>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Bienvenue sur le Portail Sûreté</h1>
+        <p>Accédez facilement à vos rapports interactifs</p>
+        <div class="btn-container">
+            <button onclick="changerRapport('niveauAlerte')">Voir Rapport Alerte</button>
+            <button onclick="changerRapport('tableauDeBord')">Voir Tableau de Bord</button>
+            <button onclick="changerRapport('videosurveillance')">Voir CCTV</button>
         </div>
     </div>
-</div>
 
-<!-- Iframe pour rapports -->
-<div id="iframe-container">
-    <button id="backButton" onclick="backToHome()">← Retour</button>
-    <iframe id="reportFrame"></iframe>
-</div>
+    <!-- Onglets de navigation -->
+    <div class="tabs">
+        <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
+        <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+        <button onclick="changerRapport('videosurveillance')">Vidéosurveillance</button>
+    </div>
+
+    <!-- Zone où s’affiche le rapport Power BI -->
+    <iframe id="rapportIframe" src="" allowfullscreen></iframe>
 
 <script>
-const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-};
+    const rapports = {
+        niveauAlerte: `<iframe title="Niveau d'Alerte" 
+            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowfullscreen="true"></iframe>`,
 
-function loadReport(key) {
-    document.getElementById("homePage").style.display = "none";
-    document.getElementById("iframe-container").style.display = "block";
-    document.getElementById("reportFrame").src = rapports[key];
-    document.getElementById("backButton").style.display = "block";
-}
+        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE" 
+            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowfullscreen="true"></iframe>`,
 
-function backToHome() {
-    document.getElementById("iframe-container").style.display = "none";
-    document.getElementById("reportFrame").src = "";
-    document.getElementById("backButton").style.display = "none";
-    document.getElementById("homePage").style.display = "flex";
-}
+        videosurveillance: `<iframe title="VIDEO SURVEILLANCE" 
+            src="https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowfullscreen="true"></iframe>`
+    };
+
+    const iframeContainer = document.getElementById("rapportIframe");
+    const buttons = document.querySelectorAll(".tabs button");
+
+    function changerRapport(rapportKey) {
+        iframeContainer.srcdoc = rapports[rapportKey];
+        buttons.forEach(btn => btn.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+    }
+
+    // On affiche par défaut le premier rapport
+    changerRapport('niveauAlerte');
 </script>
 
 </body>
