@@ -2,28 +2,27 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Bienvenu / Portail SURETE SITARAIL</title>
+<title>Portail SIATARAIL</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    /* Style global */
     body {
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f4f6f8;
+        background-color: #f0f2f5;
         color: #333;
     }
 
-    /* Header */
     header {
         background-color: #1f2937;
-        color: #ffffff;
-        padding: 30px 20px;
+        color: #fff;
+        padding: 40px 20px;
         text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     header h1 {
         margin: 0;
-        font-size: 2.5em;
+        font-size: 2.8em;
     }
 
     header p {
@@ -40,60 +39,92 @@
         margin-top: 50px;
     }
 
+    #homePage h2 {
+        font-size: 1.8em;
+        color: #1f2937;
+        margin-bottom: 40px;
+    }
+
     .cards-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 30px;
-        margin-top: 30px;
+        gap: 40px;
     }
 
+    /* Cartes de rapports */
     .report-card {
-        background-color: #fff;
-        border-radius: 12px;
-        width: 280px;
-        height: 250px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: linear-gradient(145deg, #ffffff, #e2e8f0);
+        border-radius: 16px;
+        width: 300px;
+        height: 280px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 20px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
     }
 
+    /* Animation de survol */
     .report-card:hover {
-        transform: translateY(-8px) scale(1.05);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        transform: translateY(-12px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    /* Petit effet animé */
+    .report-card::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(37, 99, 235, 0.2);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.5s ease, height 0.5s ease;
+        z-index: 0;
+    }
+
+    .report-card:hover::before {
+        width: 400px;
+        height: 400px;
     }
 
     .report-card h3 {
-        font-size: 1.4em;
         margin-bottom: 15px;
-        color: #111;
+        font-size: 1.5em;
+        color: #1f2937;
+        z-index: 1;
     }
 
     .report-card p {
-        font-size: 0.95em;
-        color: #555;
+        font-size: 1em;
+        color: #4b5563;
+        z-index: 1;
     }
 
-    /* Iframe rapport */
+    /* Container rapport */
     #reportContainer {
         display: none;
         position: relative;
+        padding-top: 40px;
     }
 
     iframe {
         width: 90%;
         height: 80vh;
         border: none;
-        border-radius: 10px;
-        margin: 40px auto;
+        border-radius: 12px;
+        margin: 0 auto 40px auto;
         display: block;
-        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        box-shadow: 0 0 25px rgba(0,0,0,0.2);
     }
 
     /* Bouton retour */
@@ -101,36 +132,56 @@
         position: absolute;
         top: 20px;
         left: 20px;
-        padding: 12px 25px;
+        padding: 14px 28px;
         background-color: #2563eb;
         color: white;
         border: none;
         border-radius: 8px;
         font-weight: bold;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transition: background 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        transition: background 0.3s ease, transform 0.2s ease;
     }
 
     #backButton:hover {
         background-color: #1e40af;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media(max-width: 1024px){
+        .cards-container {
+            gap: 30px;
+        }
+    }
+
+    @media(max-width: 768px){
+        .cards-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .report-card {
+            width: 90%;
+            height: auto;
+            padding: 30px;
+        }
     }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Bienvenu / Portail SURETE SITARAIL</h1>
-    <p>Explorez nos rapports détaillés pour une meilleure gestion de la sûreté dans nos emprises et sur tout le réseau ferroviaire</p>
+    <h1>Portail SIATARAIL</h1>
+    <p>Découvrez nos rapports pour une gestion optimale de la sûreté</p>
 </header>
 
-<!-- Page d'accueil -->
 <div id="homePage">
     <h2>Choisissez un rapport à consulter</h2>
     <div class="cards-container">
         <div class="report-card" onclick="loadReport('niveauAlerte')">
             <h3>Niveau d'Alerte</h3>
-            <p>Suivi du niveaux d'alerte de sécurité en temps réel</p>
+            <p>Suivi des niveaux de sécurité en temps réel</p>
         </div>
         <div class="report-card" onclick="loadReport('tableauDeBord')">
             <h3>Tableau de Bord Sûreté</h3>
@@ -138,23 +189,21 @@
         </div>
         <div class="report-card" onclick="loadReport('videosurveillance')">
             <h3>Vidéosurveillance</h3>
-            <p>Suivi du système de vidéosurveillance et incidents en temps réel</p>
+            <p>Suivi des caméras et incidents en temps réel</p>
         </div>
     </div>
 </div>
 
-<!-- Container pour iframe -->
 <div id="reportContainer">
     <button id="backButton" onclick="backToHome()">← Retour à l'accueil</button>
     <iframe id="reportIframe" src="" allowfullscreen></iframe>
 </div>
 
 <script>
-    // URLs des rapports Power BI
     const rapports = {
         niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-        tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-        videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+        tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-d3cb",
+        videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-d3cb"
     };
 
     function loadReport(rapportKey) {
