@@ -1,68 +1,100 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil Power BI</title>
-<style>
-body, html { margin: 0; padding: 0; font-family: Arial; height: 100%; overflow: hidden; }
+    <meta charset="UTF-8">
+    <title>Portail des Rapports Sûreté</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            text-align: center;
+        }
 
-.video-container {
-    width: 100%; height: 100%; position: relative;
-}
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+        }
 
-video {
-    width: 100%; height: 100%; object-fit: cover;
-}
+        h1 {
+            margin: 0;
+        }
 
-.overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    background: rgba(0,0,0,0.4); color: white; text-align: center;
-}
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
 
-button {
-    padding: 20px 40px; margin: 10px; font-size: 18px; cursor: pointer; border-radius: 10px;
-    border: none; background-color: rgba(255,255,255,0.9); color: black;
-}
+        .tabs button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #1f2937;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-iframe {
-    width: 100%; height: 100%; border: none; display: none;
-}
-</style>
+        .tabs button.active {
+            background-color: #2563eb; /* bleu pour actif */
+        }
+
+        .tabs button:hover {
+            background-color: #374151;
+        }
+
+        iframe {
+            width: 90%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="video-container" id="videoContainer">
-    <video autoplay muted loop>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
-    </video>
-    <div class="overlay">
-        <h1>Bienvenue sur le portail</h1>
-        <p>Cliquez sur un rapport pour l’afficher</p>
-        <button onclick="loadReport(1)">Rapport 1</button>
-        <button onclick="loadReport(2)">Rapport 2</button>
-        <button onclick="loadReport(3)">Rapport 3</button>
-    </div>
+<header>
+    <h1>Portail des Rapports Sûreté</h1>
+</header>
+
+<div class="tabs">
+    <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
+    <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+    <button onclick="changerRapport('videosurveillance')">Vidéosurveillance</button> <!-- Ajouté le troisième rapport -->
 </div>
 
-<iframe id="reportFrame"></iframe>
+<iframe id="rapportIframe" src="" allowfullscreen></iframe>
 
 <script>
-function loadReport(id) {
-    let urls = {
-        1: 'https://app.powerbi.com/reportEmbed?reportId=1',
-        2: 'https://app.powerbi.com/reportEmbed?reportId=2',
-        3: 'https://app.powerbi.com/reportEmbed?reportId=3'
+    // Contenu des iframes pour chaque rapport
+    const rapports = {
+        niveauAlerte: `https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb`, // URL du rapport "Niveau d'Alerte"
+        
+        tableauDeBord: `https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb`, // URL du rapport "Tableau de bord Sûreté"
+        
+        videosurveillance: `https://app.powerbi.com/reportEmbed?reportId=TON_REPORT_ID_VIDEOSURVEILLANCE&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb` // Remplacez avec l'ID de votre rapport "Vidéosurveillance"
     };
-    // cacher la vidéo
-    document.getElementById('videoContainer').style.display = 'none';
-    // afficher l'iframe avec le rapport
-    let iframe = document.getElementById('reportFrame');
-    iframe.src = urls[id];
-    iframe.style.display = 'block';
-}
+
+    const iframeContainer = document.getElementById('rapportIframe');
+    const buttons = document.querySelectorAll('.tabs button');
+
+    function changerRapport(rapportKey) {
+        iframeContainer.src = rapports[rapportKey]; // Chargement du rapport Power BI dans l'iframe
+
+        // Gérer le style actif
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
+    // Affiche le rapport par défaut au chargement
+    changerRapport('niveauAlerte');
 </script>
 
 </body>
