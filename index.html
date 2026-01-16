@@ -2,159 +2,206 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<title>Portail des Rapports & Contacts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portail des Rapports Sûreté</title>
 
 <style>
-    /* --- Style Global --- */
-    * {
-        box-sizing: border-box;
-    }
+    /* Global */
     body, html {
         margin: 0;
         padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+        color: #1f2937;
         width: 100%;
         height: 100%;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #0d1117;
-        color: #e1e4e8;
-        overflow-x: hidden;
     }
 
-    /* --- Section Hero (Accueil) --- */
-    .hero {
-        width: 100%;
-        height: 40vh;
-        min-height: 300px;
-        background: linear-gradient(135deg, #0f2027, #2c5364);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    header {
+        background: #2563eb;
+        color: white;
+        padding: 25px;
         text-align: center;
     }
-    .hero h1 {
-        font-size: 3rem;
+    header h1 {
         margin: 0;
-        color: #ffffff;
+        font-size: 2.5rem;
     }
-    .hero p {
-        font-size: 1.2rem;
-        margin-top: 10px;
-        color: #cbd5e1;
-    }
-    .hero .btn-container {
-        margin-top: 20px;
-    }
-    .hero button {
-        padding: 12px 28px;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        color: #fff;
-        background: #2563eb;
-        cursor: pointer;
-        transition: 0.3s ease;
-        margin: 0 10px;
-    }
-    .hero button:hover {
-        background: #1e40af;
+    header p {
+        margin-top: 8px;
+        font-size: 1.1rem;
+        opacity: 0.9;
     }
 
-    /* --- Tabs Section --- */
-    .tabs {
+    .section {
+        padding: 30px 15px;
+        text-align: center;
+    }
+
+    /* Cards */
+    .cards-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
-        margin: 25px 0;
+        gap: 20px;
+        margin-top: 15px;
     }
-    .tabs button {
-        padding: 10px 22px;
-        font-size: 16px;
-        border: none;
-        border-radius: 6px;
-        background: #1f2937;
-        color: white;
+    .card {
+        background: white;
+        width: 280px;
+        padding: 18px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: pointer;
-        transition: 0.3s;
     }
-    .tabs button.active {
-        background: #2563eb;
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.18);
     }
-    .tabs button:hover {
-        background: #374151;
+    .card h3 {
+        margin-top: 0;
+        font-size: 1.4rem;
+        color: #2563eb;
+    }
+    .card p {
+        font-size: 0.95rem;
+        color: #555;
     }
 
-    /* --- Iframe Section --- */
+    /* Iframe */
     #rapportIframe {
         width: 95%;
         height: 65vh;
         border: none;
         border-radius: 8px;
-        box-shadow: 0px 4px 18px rgba(0,0,0,0.25);
-        margin: 20px auto;
-        display: block;
         background: white;
+        margin-top: 25px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.20);
+        display: block;
     }
 
-    /* --- Responsive Design --- */
+    /* Contacts */
+    .contacts {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+        max-width: 850px;
+        margin: 40px auto;
+        text-align: left;
+    }
+    .contacts h2 {
+        color: #2563eb;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .contact-card {
+        background: #f8f9fa;
+        padding: 18px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .contact-country {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 6px;
+    }
+    .contact-person {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .contact-person a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .contact-person a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-        .hero h1 { font-size: 2.2rem; }
-        .hero p { font-size: 1rem; }
-        .tabs button { font-size: 14px; padding: 8px 16px; }
+        #rapportIframe {
+            height: 60vh;
+        }
+        .card {
+            width: 90%;
+        }
     }
 </style>
-
 </head>
+
 <body>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>Bienvenue sur le Portail Sûreté</h1>
-        <p>Accédez facilement à vos rapports interactifs</p>
-        <div class="btn-container">
-            <button onclick="changerRapport('niveauAlerte')">Voir Rapport Alerte</button>
-            <button onclick="changerRapport('tableauDeBord')">Voir Tableau de Bord</button>
-            <button onclick="changerRapport('videosurveillance')">Voir CCTV</button>
+<header>
+    <h1>Portail des Rapports & Contacts</h1>
+    <p>Accédez rapidement à vos rapports Power BI et à nos contacts utiles</p>
+</header>
+
+<!-- Rapports -->
+<div class="section">
+    <h2>📊 Nos Rapports</h2>
+    <div class="cards-container">
+        <div class="card" onclick="chargerRapport('niveauAlerte')">
+            <h3>Niveau d’Alerte</h3>
+            <p>Analyse des indicateurs clés du réseau.</p>
+        </div>
+        <div class="card" onclick="chargerRapport('tableauDeBord')">
+            <h3>Tableau de bord Sûreté</h3>
+            <p>Visualisation complète de la sûreté.</p>
+        </div>
+        <div class="card" onclick="chargerRapport('videosurveillance')">
+            <h3>Vidéosurveillance CCTV</h3>
+            <p>Accès au rapport de vidéosurveillance.</p>
         </div>
     </div>
 
-    <!-- Onglets de navigation -->
-    <div class="tabs">
-        <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
-        <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
-        <button onclick="changerRapport('videosurveillance')">Vidéosurveillance</button>
+    <iframe id="rapportIframe" src="" allowfullscreen></iframe>
+</div>
+
+<!-- Contacts Utiles -->
+<div class="section contacts">
+    <h2>📞 Contacts Utiles</h2>
+
+    <div class="contact-card">
+        <div class="contact-country">🇨🇮 Côte d'Ivoire</div>
+        <div class="contact-person">
+            <strong>M. Yoro Louis</strong><br>
+            Chef Division Sûreté<br>
+            📞 <a href="tel:+2250747974398">07 47 97 43 98</a><br>
+            📧 <a href="mailto:tchessiehi.yoro@sitarail.com">tchessiehi.yoro@sitarail.com</a>
+        </div>
     </div>
 
-    <!-- Zone où s’affiche le rapport Power BI -->
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe>
+    <div class="contact-card">
+        <div class="contact-country">🇧🇫 Burkina Faso</div>
+        <div class="contact-person">
+            <strong>M. Sorgho Ousmane</strong><br>
+            📞 <a href="tel:+22676560431">+226 76 56 04 31</a><br>
+            📧 <a href="mailto:ousmane.sorgho@sitarail.com">ousmane.sorgho@sitarail.com</a>
+        </div>
+    </div>
+</div>
 
 <script>
     const rapports = {
-        niveauAlerte: `<iframe title="Niveau d'Alerte" 
-            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowfullscreen="true"></iframe>`,
-
-        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE" 
-            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowfullscreen="true"></iframe>`,
-
-        videosurveillance: `<iframe title="VIDEO SURVEILLANCE" 
-            src="https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowfullscreen="true"></iframe>`
+        niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+        tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+        videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
     };
 
-    const iframeContainer = document.getElementById("rapportIframe");
-    const buttons = document.querySelectorAll(".tabs button");
-
-    function changerRapport(rapportKey) {
-        iframeContainer.srcdoc = rapports[rapportKey];
-        buttons.forEach(btn => btn.classList.remove("active"));
-        event.currentTarget.classList.add("active");
+    function chargerRapport(key) {
+        document.getElementById('rapportIframe').src = rapports[key];
+        document.getElementById('rapportIframe').scrollIntoView({behavior: 'smooth'});
     }
-
-    // On affiche par défaut le premier rapport
-    changerRapport('niveauAlerte');
 </script>
 
 </body>
