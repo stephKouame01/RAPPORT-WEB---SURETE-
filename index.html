@@ -1,102 +1,101 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil - Rapports Power BI</title>
-<style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Arial, sans-serif;
-        background-color: #000; /* pour la vidéo */
-    }
+    <meta charset="UTF-8">
+    <title>Portail des Rapports Sûreté</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            text-align: center;
+        }
 
-    .video-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        overflow: hidden;
-    }
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+        }
 
-    .video-container video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+        h1 {
+            margin: 0;
+        }
 
-    .overlay-content {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        flex-direction: column;
-        color: #fff;
-        text-align: center;
-        background-color: rgba(0,0,0,0.4); /* optionnel, rend le texte lisible */
-    }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
 
-    .report-card {
-        background-color: rgba(255,255,255,0.9);
-        color: #000;
-        padding: 20px;
-        margin: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-        width: 250px;
-        transition: transform 0.2s;
-    }
+        .tabs button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #1f2937;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-    .report-card:hover {
-        transform: scale(1.05);
-    }
+        .tabs button.active {
+            background-color: #2563eb; /* bleu pour actif */
+        }
 
-    .cards-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 20px;
-    }
+        .tabs button:hover {
+            background-color: #374151;
+        }
 
-</style>
+        iframe {
+            width: 90%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="video-container">
-    <video id="introVideo" autoplay muted loop>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
-    </video>
+<header>
+    <h1>Portail des Rapports Sûreté</h1>
+</header>
+
+<div class="tabs">
+    <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
+    <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
 </div>
 
-<div class="overlay-content">
-    <h1>Bienvenue sur le portail des rapports</h1>
-    <p>Cliquez sur un rapport pour l’ouvrir</p>
-
-    <div class="cards-container">
-        <div class="report-card" onclick="openReport('https://app.powerbi.com/reportEmbed?reportId=1')">
-            Rapport 1
-        </div>
-        <div class="report-card" onclick="openReport('https://app.powerbi.com/reportEmbed?reportId=2')">
-            Rapport 2
-        </div>
-        <div class="report-card" onclick="openReport('https://app.powerbi.com/reportEmbed?reportId=3')">
-            Rapport 3
-        </div>
-    </div>
-</div>
+<iframe id="rapportIframe" src="" allowfullscreen></iframe>
 
 <script>
-    function openReport(url) {
-        // Redirige vers le rapport choisi
-        window.location.href = url;
+    // Contenu des iframes pour chaque rapport
+    const rapports = {
+        niveauAlerte: `<iframe title="Niveau d'Alerte" width="1140" height="541.25"
+            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowFullScreen="true"></iframe>`,
+
+        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE CI&BF" width="1140" height="541.25"
+            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowFullScreen="true"></iframe>`
+    };
+
+    const iframeContainer = document.getElementById('rapportIframe');
+    const buttons = document.querySelectorAll('.tabs button');
+
+    function changerRapport(rapportKey) {
+        iframeContainer.srcdoc = rapports[rapportKey];
+
+        // Gérer le style actif
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
     }
+
+    // Affiche le rapport par défaut au chargement
+    changerRapport('niveauAlerte');
 </script>
 
 </body>
