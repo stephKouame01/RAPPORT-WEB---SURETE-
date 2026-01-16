@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portail SÛRETÉ SITARAIL - Accueil</title>
+<title>Portail SÛRETÉ SIATARAIL - Accueil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -210,12 +210,12 @@ header p {
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenu sur le Portail SÛRETÉ SITARAIL</h1>
+    <h1>Portail SÛRETÉ SIATARAIL</h1>
     <p>Choisissez un rapport ou contactez nos équipes utiles</p>
 </header>
 
 <!-- Section Rapports -->
-<div class="section">
+<div class="section" id="homeSection">
     <h2>📊 Nos Rapports</h2>
     <div class="cards-container">
         <div class="card" onclick="chargerRapport('niveauAlerte')">
@@ -260,7 +260,7 @@ header p {
 </div>
 
 <!-- Rapport Section -->
-<div id="rapportSection">
+<div id="rapportSection" style="display:none;">
     <iframe id="rapportIframe" src="" allowfullscreen></iframe><br>
     <button id="backButton" onclick="retourAccueil()">Retour à l’Accueil</button>
 </div>
@@ -269,4 +269,37 @@ header p {
 // Données des rapports
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app
+    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+};
+
+function chargerRapport(key) {
+    // Cacher la section d'accueil et afficher la section du rapport
+    document.getElementById('homeSection').style.display = 'none';
+    document.getElementById('rapportSection').style.display = 'block';
+    
+    // Charger l'iframe avec le rapport approprié
+    document.getElementById('rapportIframe').src = rapports[key];
+}
+
+// Retour à l'accueil
+function retourAccueil() {
+    document.getElementById('rapportSection').style.display = 'none';
+    document.getElementById('homeSection').style.display = 'block';
+    document.getElementById('rapportIframe').src = ''; // Clear iframe
+}
+
+// Actualisation date & heure
+function updateDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('fr-FR');
+    const time = now.toLocaleTimeString('fr-FR');
+    document.getElementById('dateTimeDisplay').innerText = `📅 ${date} ⏰ ${time}`;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
+
+</body>
+</html>
