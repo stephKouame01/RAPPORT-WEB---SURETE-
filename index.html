@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portail des Rapports & Contacts</title>
+<title>Portail de la Sûreté SITARAIL</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,8 +11,8 @@
         margin: 0;
         padding: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f8f9fa;
-        color: #1f2937;
+        background: #1f2937;
+        color: #f4f6f8;
         width: 100%;
         height: 100%;
     }
@@ -28,9 +28,20 @@
         font-size: 2.5rem;
     }
     header p {
-        margin-top: 8px;
+        margin-top: 6px;
         font-size: 1.1rem;
         opacity: 0.9;
+    }
+
+    /* Affichage Date & Heure */
+    #dateTimeDisplay {
+        background: #111827;
+        color: #ffffff;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 10px 0;
+        border-bottom: 3px solid #2563eb;
     }
 
     .section {
@@ -69,32 +80,20 @@
         color: #555;
     }
 
-    /* Iframe */
-    #rapportIframe {
-        width: 95%;
-        height: 65vh;
-        border: none;
-        border-radius: 8px;
-        background: white;
-        margin-top: 25px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.20);
-        display: block;
-    }
-
     /* Contacts */
     .contacts {
-        background: white;
+        background: #2d3748;
         padding: 25px;
         border-radius: 12px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.12);
         max-width: 850px;
         margin: 40px auto;
         text-align: left;
+        color: #f4f6f8;
     }
     .contacts h2 {
         color: #2563eb;
-        margin-bottom: 15px;
         text-align: center;
+        margin-bottom: 15px;
     }
     .contact-card {
         background: #f8f9fa;
@@ -129,9 +128,6 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-        #rapportIframe {
-            height: 60vh;
-        }
         .card {
             width: 90%;
         }
@@ -142,9 +138,12 @@
 <body>
 
 <header>
-    <h1>Portail des Rapports & Contacts</h1>
+    <h1>Bienvenu sur le Portail de la Sûreté SITARAIL</h1>
     <p>Accédez rapidement à vos rapports Power BI et à nos contacts utiles</p>
 </header>
+
+<!-- Affichage de la date & heure -->
+<div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <!-- Rapports -->
 <div class="section">
@@ -163,8 +162,6 @@
             <p>Accès au rapport de vidéosurveillance.</p>
         </div>
     </div>
-
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe>
 </div>
 
 <!-- Contacts Utiles -->
@@ -199,9 +196,26 @@
     };
 
     function chargerRapport(key) {
-        document.getElementById('rapportIframe').src = rapports[key];
-        document.getElementById('rapportIframe').scrollIntoView({behavior: 'smooth'});
+        window.open(rapports[key], "_blank");
     }
+
+    function updateDateTime() {
+        const now = new Date();
+        const date = now.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        const time = now.toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        document.getElementById('dateTimeDisplay').innerText = `📅 ${date} ⏰ ${time}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // première initialisation
 </script>
 
 </body>
