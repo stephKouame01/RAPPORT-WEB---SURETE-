@@ -12,29 +12,32 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #111827;
+    background: #1c2d41;
     color: #e5e7eb;
     width: 100%;
     height: 100%;
 }
 
-/* === Barre Sticky Date/Heure === */
+/* === Date et Heure sticky === */
 #dateTimeDisplay {
-    background: #1f2937;
+    background: #3b4c63;
     color: #ffffff;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px solid #2563eb;
+    border-bottom: 3px solid #4f77a2;
+    font-weight: bold;
 }
 
 /* === Header avec Hero === */
 header {
     text-align: center;
     padding: 40px 15px 20px;
+    background: linear-gradient(135deg, #1e2a39, #3a4b69);
+    border-bottom: 3px solid #2563eb;
 }
 
 header h1 {
@@ -44,9 +47,9 @@ header h1 {
 }
 
 header p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 10px 0;
-    color: #9ca3af;
+    color: #a1afc6;
 }
 
 /* === Section Rapports === */
@@ -56,16 +59,17 @@ header p {
 }
 
 .section h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
-    color: #2563eb;
+    color: #4f77a2;
+    text-transform: uppercase;
 }
 
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
+    gap: 30px;
     margin-top: 10px;
 }
 
@@ -77,18 +81,19 @@ header p {
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    background-color: #3b4c63;
 }
 
 .card h3 {
     margin-top: 0;
     font-size: 1.5rem;
-    color: #4f46e5;
+    color: #ffffff;
 }
 
 .card p {
@@ -101,6 +106,7 @@ header p {
     display: none;
     text-align: center;
     padding: 30px 15px;
+    transition: opacity 0.4s ease;
 }
 
 #rapportSection iframe {
@@ -111,7 +117,7 @@ header p {
     box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 
-/* === Retour à l'Accueil === */
+/* === Bouton Retour === */
 #backButton {
     margin-top: 20px;
     padding: 15px 30px;
@@ -130,7 +136,7 @@ header p {
 
 /* === Contacts Utiles === */
 .contacts {
-    background: #111827;
+    background: #1c2d41;
     padding: 30px 20px;
     border-radius: 12px;
     max-width: 900px;
@@ -143,6 +149,7 @@ header p {
     text-align: center;
     color: #2563eb;
     font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 .contact-grid {
@@ -203,25 +210,25 @@ header p {
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenue sur le Portail SURETE SITARAIL</h1>
-    <p>Accédez facilement à vos rapports sûreté</p>
+    <h1>Bienvenu sur le Portail SURETE SIATARAIL</h1>
+    <p>Accédez facilement à vos rapports et contacts</p>
 </header>
 
 <!-- Section Rapports -->
 <div class="section">
-    <h2>📊 Nos Rapports</h2>
+    <h2>📊 Interface Sûreté</h2>
     <div class="cards-container">
         <div class="card" onclick="chargerRapport('niveauAlerte')">
             <h3>Niveau d’Alerte</h3>
-            <p>Analyse des indicateurs clés du réseau.</p>
+            <p>Suivi du niveau d'alerte en temps réel.</p>
         </div>
         <div class="card" onclick="chargerRapport('tableauDeBord')">
             <h3>Tableau de bord Sûreté</h3>
-            <p>Visualisation complète de la sûreté.</p>
+            <p>Suivi de l'évolution des indicateurs sûreté.</p>
         </div>
         <div class="card" onclick="chargerRapport('videosurveillance')">
             <h3>Vidéosurveillance CCTV</h3>
-            <p>Accès au rapport de vidéosurveillance.</p>
+            <p>Rapport sur la vidéosurveillance en temps réel.</p>
         </div>
     </div>
 </div>
@@ -261,5 +268,4 @@ header p {
 <script>
 // Contenu des rapports
 const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1
+    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b
