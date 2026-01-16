@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portail SURETE SIATARAIL - Accueil</title>
+<title>Portail SÛRETÉ SIATARAIL - Accueil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,117 +11,114 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1c2d41;
-    color: #e5e7eb;
+    font-family: 'Arial', sans-serif;
+    background: #f2f4f7;
+    color: #2c3e50;
     width: 100%;
     height: 100%;
 }
 
-/* === Date et Heure sticky === */
+/* === Barre de date et heure === */
 #dateTimeDisplay {
-    background: #3b4c63;
-    color: #ffffff;
+    background: #ffffff;
+    color: #2c3e50;
     text-align: center;
-    font-size: 1.3rem;
-    padding: 10px 0;
+    font-size: 1.2rem;
+    padding: 12px 0;
+    border-bottom: 3px solid #4f8ef7;
+    font-weight: bold;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    border-bottom: 3px solid #4f77a2;
-    font-weight: bold;
+    z-index: 100;
 }
 
-/* === Header avec Hero === */
+/* === Header (Accueil) === */
 header {
     text-align: center;
-    padding: 40px 15px 20px;
-    background: linear-gradient(135deg, #1e2a39, #3a4b69);
-    border-bottom: 3px solid #2563eb;
+    padding: 30px 15px;
+    background: #ffffff;
+    border-bottom: 2px solid #4f8ef7;
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin: 0;
-    color: #ffffff;
+    color: #2c3e50;
 }
-
 header p {
-    font-size: 1.3rem;
-    margin: 10px 0;
-    color: #a1afc6;
+    font-size: 1.25rem;
+    margin: 8px 0;
+    color: #4b5563;
 }
 
 /* === Section Rapports === */
 .section {
-    padding: 30px 15px;
+    margin: 30px 0;
+    padding: 0 15px;
     text-align: center;
 }
 
 .section h2 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    color: #4f77a2;
-    text-transform: uppercase;
+    font-size: 2rem;
+    color: #4f8ef7;
+    margin-bottom: 15px;
 }
 
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    margin-top: 10px;
+    gap: 22px;
 }
 
 .card {
-    background: #1f2937;
-    color: white;
-    width: 280px;
-    padding: 22px;
+    background: #ffffff;
+    width: 300px;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    border: 1px solid #d1d5db;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-    background-color: #3b4c63;
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .card h3 {
     margin-top: 0;
-    font-size: 1.5rem;
-    color: #ffffff;
+    font-size: 1.4rem;
+    color: #2563eb;
 }
 
 .card p {
     font-size: 1rem;
-    color: #d1d5db;
+    color: #4b5563;
+    margin-top: 8px;
 }
 
 /* === Rapport Section === */
 #rapportSection {
     display: none;
+    padding: 20px 15px;
     text-align: center;
-    padding: 30px 15px;
-    transition: opacity 0.4s ease;
 }
 
-#rapportSection iframe {
-    width: 90%;
-    height: 80vh;
-    border: none;
+#rapportIframe {
+    width: 95%;
+    height: 75vh;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    background: #ffffff;
 }
 
-/* === Bouton Retour === */
+/* === Retour à l'accueil === */
 #backButton {
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    margin-top: 16px;
+    padding: 14px 28px;
+    font-size: 1.1rem;
     background-color: #2563eb;
     color: white;
     border: none;
@@ -131,51 +128,49 @@ header p {
 }
 
 #backButton:hover {
-    background-color: #1d4ed8;
+    background-color: #1b4ed6;
 }
 
 /* === Contacts Utiles === */
 .contacts {
-    background: #1c2d41;
-    padding: 30px 20px;
+    background: #ffffff;
+    padding: 28px 22px;
     border-radius: 12px;
     max-width: 900px;
-    margin: 40px auto;
-    text-align: left;
-    border-top: 3px solid #2563eb;
+    margin: 30px auto 50px;
+    border: 1px solid #d1d5db;
 }
 
 .contacts h2 {
     text-align: center;
     color: #2563eb;
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 1.9rem;
+    margin-bottom: 18px;
 }
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .contact-card {
-    background: #1f2937;
     padding: 18px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: 0.3s ease;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-card:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.10);
 }
 
 .contact-country {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #2563eb;
+    color: #1f2937;
 }
 
 .contact-person {
@@ -183,52 +178,47 @@ header p {
     font-size: 1rem;
     line-height: 1.6;
 }
-
 .contact-person a {
-    color: #60a5fa;
+    color: #2563eb;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 }
-
 .contact-person a:hover {
     text-decoration: underline;
 }
 
-/* === Responsive === */
 @media (max-width: 768px) {
-    header h1 { font-size: 2.3rem; }
-    .section h2 { font-size: 1.8rem; }
+    #rapportIframe { height: 60vh; }
 }
 
 </style>
 
 </head>
-
 <body>
 
-<!-- Date & Heure Sticky -->
+<!-- Date & Heure -->
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenu sur le Portail SURETE SIATARAIL</h1>
-    <p>Accédez facilement à vos rapports et contacts</p>
+    <h1>Portail SÛRETÉ SIATARAIL</h1>
+    <p>Choisissez un rapport ou contactez nos équipes utiles</p>
 </header>
 
 <!-- Section Rapports -->
 <div class="section">
-    <h2>📊 Interface Sûreté</h2>
+    <h2>📊 Nos Rapports</h2>
     <div class="cards-container">
         <div class="card" onclick="chargerRapport('niveauAlerte')">
             <h3>Niveau d’Alerte</h3>
-            <p>Suivi du niveau d'alerte en temps réel.</p>
+            <p>Suivi du niveau d’alerte en temps réel</p>
         </div>
         <div class="card" onclick="chargerRapport('tableauDeBord')">
             <h3>Tableau de bord Sûreté</h3>
-            <p>Suivi de l'évolution des indicateurs sûreté.</p>
+            <p>Analyse des indicateurs de sûreté du réseau</p>
         </div>
         <div class="card" onclick="chargerRapport('videosurveillance')">
             <h3>Vidéosurveillance CCTV</h3>
-            <p>Rapport sur la vidéosurveillance en temps réel.</p>
+            <p>Rapport vidéosurveillance du réseau</p>
         </div>
     </div>
 </div>
@@ -238,7 +228,7 @@ header p {
     <h2>📞 Contacts Utiles</h2>
     <div class="contact-grid">
         <div class="contact-card">
-            <div class="contact-country">🇨🇮 Côte d'Ivoire</div>
+            <div class="contact-country">🇨🇮 Côte d’Ivoire</div>
             <div class="contact-person">
                 <strong>M. Yoro Louis</strong><br>
                 Chef Division Sûreté<br>
@@ -261,11 +251,44 @@ header p {
 
 <!-- Rapport Section -->
 <div id="rapportSection">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe>
-    <button id="backButton" onclick="retourAccueil()">Retour à l'Accueil</button>
+    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br>
+    <button id="backButton" onclick="retourAccueil()">Retour à l’Accueil</button>
 </div>
 
 <script>
-// Contenu des rapports
+// Données des rapports
 const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b
+    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+};
+
+function chargerRapport(key) {
+    document.querySelector('.section').style.display = 'none';
+    document.querySelector('.contacts').style.display = 'none';
+    document.getElementById('rapportIframe').src = rapports[key];
+    document.getElementById('rapportSection').style.display = 'block';
+}
+
+// Retour à l'accueil
+function retourAccueil() {
+    document.getElementById('rapportSection').style.display = 'none';
+    document.querySelector('.section').style.display = 'block';
+    document.querySelector('.contacts').style.display = 'block';
+    document.getElementById('rapportIframe').src = '';
+}
+
+// Actualisation date & heure
+function updateDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('fr-FR');
+    const time = now.toLocaleTimeString('fr-FR');
+    document.getElementById('dateTimeDisplay').innerText = `📅 ${date} ⏰ ${time}`;
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+</script>
+
+</body>
+</html>
