@@ -67,6 +67,7 @@
 <div class="tabs">
     <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
     <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+    <button onclick="changerRapport('videosurveillance')">Vidéosurveillance</button> <!-- Ajouté le rapport Vidéosurveillance -->
 </div>
 
 <iframe id="rapportIframe" src="" allowfullscreen></iframe>
@@ -74,20 +75,18 @@
 <script>
     // Contenu des iframes pour chaque rapport
     const rapports = {
-        niveauAlerte: `<iframe title="Niveau d'Alerte" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`,
-
-        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE CI&BF" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`
+        niveauAlerte: `https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb`, // URL du rapport "Niveau d'Alerte"
+        
+        tableauDeBord: `https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb`, // URL du rapport "Tableau de bord Sûreté"
+        
+        videosurveillance: `https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb` // URL du rapport "Vidéosurveillance"
     };
 
     const iframeContainer = document.getElementById('rapportIframe');
     const buttons = document.querySelectorAll('.tabs button');
 
     function changerRapport(rapportKey) {
-        iframeContainer.srcdoc = rapports[rapportKey];
+        iframeContainer.src = rapports[rapportKey]; // Chargement du rapport Power BI dans l'iframe
 
         // Gérer le style actif
         buttons.forEach(btn => btn.classList.remove('active'));
