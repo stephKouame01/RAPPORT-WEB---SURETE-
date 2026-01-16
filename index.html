@@ -5,128 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portail SIATARAIL</title>
 <style>
-/* Reset et base */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100%;
-    overflow: hidden;
-    background-color: #111;
-}
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100%;
+        overflow: hidden;
+        background-color: #111;
+    }
 
-/* Conteneur vidéo en arrière-plan */
-.video-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 0;
-}
+    /* Conteneur vidéo */
+    .video-container {
+        width: 100%; 
+        height: 100%; 
+        position: relative;
+        z-index: 0;
+        transition: opacity 1s ease;
+    }
 
-.video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-/* Overlay pour le contenu au-dessus de la vidéo */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.5);
-    color: white;
-    text-align: center;
-    z-index: 1;
-}
+    /* Overlay contenu */
+    .overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        background: rgba(0,0,0,0.4);
+        color: white;
+        text-align: center;
+        z-index: 1;
+        transition: opacity 1s ease;
+    }
 
-.overlay h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-}
+    .overlay h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
 
-.overlay p {
-    font-size: 1.2em;
-    margin-bottom: 40px;
-}
+    /* Cartes des rapports */
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+    }
 
-/* Conteneur des cartes */
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-}
+    .report-card {
+        background-color: #1f2937;
+        color: white;
+        border-radius: 15px;
+        width: 300px;
+        padding: 25px 20px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    }
 
-/* Styles des cartes */
-.report-card {
-    background-color: #ffffff;
-    color: #111;
-    border-radius: 15px;
-    width: 250px;
-    padding: 25px 20px;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
+    .report-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
 
-.report-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
+    .report-card h2 {
+        margin-bottom: 10px;
+        font-size: 1.5em;
+    }
 
-.report-card h2 {
-    margin-bottom: 10px;
-    font-size: 1.5em;
-}
+    .report-card p {
+        font-size: 1em;
+        color: #ccc;
+    }
 
-.report-card p {
-    font-size: 1em;
-    color: #555;
-}
+    /* Iframe rapport */
+    #iframe-container {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        display: none;
+        z-index: 2;
+    }
 
-/* Container iframe pour les rapports */
-#iframe-container {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: none;
-    z-index: 2;
-}
+    #iframe-container iframe {
+        width: 100%; 
+        height: 100%; 
+        border: none;
+    }
 
-#iframe-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+    /* Bouton retour */
+    #backButton {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 3;
+        padding: 12px 20px;
+        background: rgba(255,255,255,0.9);
+        color: #111;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        display: none;
+    }
 
-/* Bouton retour */
-#backButton {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 3;
-    padding: 12px 20px;
-    background: rgba(255,255,255,0.9);
-    color: #111;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    display: none;
-}
-
-#backButton:hover {
-    background: rgba(255,255,255,1);
-}
+    #backButton:hover {
+        background: rgba(255,255,255,1);
+    }
 </style>
 </head>
 <body>
@@ -134,69 +122,58 @@ body, html {
 <!-- Vidéo en fond -->
 <div class="video-container" id="videoContainer">
     <video autoplay muted loop playsinline>
-        <source src="video/sitarail.mp4" type="video/mp4">
+        <source src="video/sitarail.mp4.mp4" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo.
     </video>
 
     <div class="overlay" id="overlay">
         <h1>Bienvenue sur SIATARAIL</h1>
         <p>Découvrez nos rapports et analyses du réseau ferroviaire</p>
-
         <div class="cards-container">
             <div class="report-card" onclick="loadReport('niveauAlerte')">
                 <h2>Niveau d’Alerte</h2>
-                <p>Analyse des indicateurs clés de performance du réseau ferroviaire.</p>
+                <p>Analyse des alertes du réseau ferroviaire.</p>
             </div>
             <div class="report-card" onclick="loadReport('tableauDeBord')">
-                <h2>Tableau de Bord Sûreté</h2>
-                <p>Visualisation complète des opérations de sûreté.</p>
+                <h2>Tableau de bord Sûreté</h2>
+                <p>Suivi global de la sûreté du réseau.</p>
             </div>
-            <div class="report-card" onclick="loadReport('cctv')">
-                <h2>Rapport Vidéosurveillance</h2>
-                <p>Suivi des caméras CCTV du réseau ferroviaire.</p>
+            <div class="report-card" onclick="loadReport('videosurveillance')">
+                <h2>Vidéosurveillance</h2>
+                <p>Rapport CCTV SITARAIL en temps réel.</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Container iframe pour les rapports -->
+<!-- Container pour iframe rapport -->
 <div id="iframe-container">
-    <iframe id="reportFrame" allowfullscreen></iframe>
+    <iframe id="reportFrame"></iframe>
 </div>
 
 <!-- Bouton retour -->
-<button id="backButton" onclick="backToVideo()">Retour à l’accueil</button>
+<button id="backButton" onclick="backToVideo()">Retour à l'accueil</button>
 
 <script>
-function loadReport(id) {
-    const urls = {
-        niveauAlerte: 'https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb',
-        tableauDeBord: 'https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb',
-        cctv: 'https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb'
-    };
-    
-    // Fondu de la vidéo
-    document.getElementById('videoContainer').style.opacity = 0;
-    document.getElementById('overlay').style.opacity = 0;
+const rapports = {
+    niveauAlerte: 'https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb',
+    tableauDeBord: 'https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb',
+    videosurveillance: 'https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb'
+};
 
-    setTimeout(() => {
-        document.getElementById('videoContainer').style.display = 'none';
-        document.getElementById('iframe-container').style.display = 'block';
-        document.getElementById('reportFrame').src = urls[id];
-        document.getElementById('backButton').style.display = 'block';
-    }, 500); // délai pour le fondu
+function loadReport(key) {
+    document.getElementById('videoContainer').style.display = 'none';
+    const iframe = document.getElementById('reportFrame');
+    iframe.src = rapports[key];
+    document.getElementById('iframe-container').style.display = 'block';
+    document.getElementById('backButton').style.display = 'block';
 }
 
 function backToVideo() {
     document.getElementById('iframe-container').style.display = 'none';
     document.getElementById('reportFrame').src = '';
     document.getElementById('backButton').style.display = 'none';
-
     document.getElementById('videoContainer').style.display = 'block';
-    setTimeout(() => {
-        document.getElementById('videoContainer').style.opacity = 1;
-        document.getElementById('overlay').style.opacity = 1;
-    }, 50);
 }
 </script>
 
