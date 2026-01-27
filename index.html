@@ -1,215 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Portail SÛRETÉ SITARAIL - Accueil</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Rapport Power BI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    width: 100%;
-    height: 100%;
-}
+    <style>
+        /* ===== RESET DE BASE ===== */
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
 
-#dateTimeDisplay {
-    background: rgba(255,255,255,0.8);
-    color: #2c3e50;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 12px 0;
-    border-bottom: 2px solid #4f8ef7;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+            /* FOND BLEU PROFESSIONNEL */
+            background: linear-gradient(
+                135deg,
+                #0b1d3a,
+                #123a72,
+                #1f5fbf
+            );
 
-header {
-    text-align: center;
-    padding: 30px 15px;
-    background: rgba(255,255,255,0.9);
-    border-bottom: 2px solid #4f8ef7;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
+            min-height: 100vh;
+        }
 
-header h1 {
-    font-size: 2.8rem;
-    margin: 0;
-    color: #2c3e50;
-}
+        /* COUCHE BLANCHE POUR LA LISIBILITÉ */
+        .overlay {
+            min-height: 100vh;
+            background-color: rgba(255, 255, 255, 0.93);
+            display: flex;
+            flex-direction: column;
+        }
 
-header p {
-    font-size: 1.15rem;
-    margin: 8px 0;
-    color: #4b5563;
-}
+        /* ===== HEADER ===== */
+        header {
+            background-color: #0b1d3a;
+            color: #ffffff;
+            padding: 18px 20px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        }
 
-.section {
-    margin: 30px 0;
-    padding: 0 20px;
-    text-align: center;
-}
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
 
-.section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 0px 0px 8px rgba(0,0,0,0.4);
-}
+        header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
 
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 15px;
-}
+        /* ===== CONTENU ===== */
+        .container {
+            padding: 20px;
+            flex: 1;
+        }
 
-.card {
-    background: #ffffff;
-    width: 300px;
-    padding: 22px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        /* ===== POWER BI ===== */
+        .powerbi-frame {
+            width: 100%;
+            height: 85vh;
+            border: none;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
 
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: #1e293b;
+        }
 
-.card h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: #2563eb;
-}
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .powerbi-frame {
+                height: 75vh;
+            }
 
-.card p {
-    margin-top: 8px;
-    font-size: 1rem;
-    color: #4b5563;
-}
-
-#rapportSection {
-    display: none;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-#rapportIframe {
-    width: 95%;
-    height: 75vh;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-#backButton {
-    margin-top: 18px;
-    padding: 12px 26px;
-    font-size: 1.1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.contacts {
-    background: rgba(255,255,255,0.9);
-    padding: 28px 22px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 30px auto 50px;
-    border: 1px solid #d1d5db;
-}
-</style>
+            header h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
+<div class="overlay">
 
-<header>
-    <h1>Bienvenue sur le Portail SÛRETÉ SITARAIL</h1>
-    <p>Choisissez un rapport ou consultez les contacts utiles</p>
-</header>
+    <header>
+        <h1>Tableau de bord Power BI</h1>
+        <p>Analyse et suivi des indicateurs</p>
+    </header>
 
-<div id="homeContent">
-
-    <div class="section">
-        <h2>📊 Nos Rapports</h2>
-        <div class="cards-container">
-
-            <div class="card" onclick="chargerRapport('niveauAlerte')">
-                <h3>Niveau d’Alerte</h3>
-                <p>Suivi du niveau d’alerte en temps réel</p>
-            </div>
-
-            <div class="card" onclick="chargerRapport('tableauDeBord')">
-                <h3>Tableau de bord Sûreté</h3>
-                <p>Analyse des indicateurs de sûreté</p>
-            </div>
-
-            <div class="card" onclick="chargerRapport('videosurveillance')">
-                <h3>Vidéosurveillance CCTV</h3>
-                <p>Rapport vidéosurveillance du réseau</p>
-            </div>
-
-            <!-- 🆕 NOUVEAU RAPPORT -->
-            <div class="card" onclick="chargerRapport('releveGlobal')">
-                <h3>Relevé Global</h3>
-                <p>Rapport global de sûreté – QUIPUX SITARAIL</p>
-            </div>
-
-        </div>
+    <div class="container">
+        <iframe 
+            class="powerbi-frame"
+            src="COLLE_ICI_TON_LIEN_PUBLISH_TO_WEB"
+            allowfullscreen="true">
+        </iframe>
     </div>
 
+    <footer>
+        © 2026 – Rapport Power BI
+    </footer>
+
 </div>
-
-<div id="rapportSection">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
-    <button id="backButton" onclick="retourAccueil()">← Retour à l’Accueil</button>
-</div>
-
-<script>
-const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    releveGlobal: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-};
-
-function chargerRapport(key) {
-    document.getElementById("homeContent").style.display = "none";
-    document.getElementById("rapportSection").style.display = "block";
-    document.getElementById("rapportIframe").src = rapports[key];
-}
-
-function retourAccueil() {
-    document.getElementById("rapportSection").style.display = "none";
-    document.getElementById("homeContent").style.display = "block";
-    document.getElementById("rapportIframe").src = "";
-}
-
-function updateDateTime() {
-    const now = new Date();
-    document.getElementById("dateTimeDisplay").innerText =
-        `📅 ${now.toLocaleDateString("fr-FR")} ⏰ ${now.toLocaleTimeString("fr-FR")}`;
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
-</script>
 
 </body>
 </html>
