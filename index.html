@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Portail SÛRETÉ SITARAIL - Accueil</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Portail des Rapports Sûreté</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            text-align: center;
+        }
 
-<style>
-body, html {
-    margin: 0;
-    padding: 0
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .tabs button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #1f2937;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tabs button.active {
+            background-color: #2563eb; /* bleu pour actif */
+        }
+
+        .tabs button:hover {
+            background-color: #374151;
+        }
+
+        iframe {
+            width: 90%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Portail des Rapports Sûreté</h1>
+</header>
+
+<div class="tabs">
+    <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
+    <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+</div>
+
+<iframe id="rapportIframe" src="" allowfullscreen></iframe>
+
+<script>
+    // Contenu des iframes pour chaque rapport
+    const rapports = {
+        niveauAlerte: `<iframe title="Niveau d'Alerte" width="1140" height="541.25"
+            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowFullScreen="true"></iframe>`,
+
+        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE CI&BF" width="1140" height="541.25"
+            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+            frameborder="0" allowFullScreen="true"></iframe>`
+    };
+
+    const iframeContainer = document.getElementById('rapportIframe');
+    const buttons = document.querySelectorAll('.tabs button');
+
+    function changerRapport(rapportKey) {
+        iframeContainer.srcdoc = rapports[rapportKey];
+
+        // Gérer le style actif
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
+    // Affiche le rapport par défaut au chargement
+    changerRapport('niveauAlerte');
+</script>
+
+</body>
+</html>
