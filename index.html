@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Portail des Rapports Sûreté</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -16,10 +17,6 @@
             background: #1f2937;
             color: white;
             padding: 20px;
-        }
-
-        h1 {
-            margin: 0;
         }
 
         .tabs {
@@ -41,7 +38,7 @@
         }
 
         .tabs button.active {
-            background-color: #2563eb; /* bleu pour actif */
+            background-color: #2563eb;
         }
 
         .tabs button:hover {
@@ -58,6 +55,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <header>
@@ -65,37 +63,34 @@
 </header>
 
 <div class="tabs">
-    <button class="active" onclick="changerRapport('niveauAlerte')">Niveau d'Alerte</button>
-    <button onclick="changerRapport('tableauDeBord')">Tableau de bord Sûreté</button>
+    <button class="active" onclick="changerRapport('niveauAlerte', this)">
+        Niveau d'Alerte
+    </button>
+    <button onclick="changerRapport('tableauDeBord', this)">
+        Tableau de bord Sûreté
+    </button>
 </div>
 
-<iframe id="rapportIframe" src="" allowfullscreen></iframe>
+<iframe 
+    id="rapportIframe"
+    src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+    allowfullscreen>
+</iframe>
 
 <script>
-    // Contenu des iframes pour chaque rapport
     const rapports = {
-        niveauAlerte: `<iframe title="Niveau d'Alerte" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`,
-
-        tableauDeBord: `<iframe title="TABLEAU DE BORD SURETE CI&BF" width="1140" height="541.25"
-            src="https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            frameborder="0" allowFullScreen="true"></iframe>`
+        niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+        tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
     };
 
-    const iframeContainer = document.getElementById('rapportIframe');
-    const buttons = document.querySelectorAll('.tabs button');
+    function changerRapport(rapportKey, bouton) {
+        document.getElementById("rapportIframe").src = rapports[rapportKey];
 
-    function changerRapport(rapportKey) {
-        iframeContainer.srcdoc = rapports[rapportKey];
+        document.querySelectorAll(".tabs button")
+            .forEach(btn => btn.classList.remove("active"));
 
-        // Gérer le style actif
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
+        bouton.classList.add("active");
     }
-
-    // Affiche le rapport par défaut au chargement
-    changerRapport('niveauAlerte');
 </script>
 
 </body>
