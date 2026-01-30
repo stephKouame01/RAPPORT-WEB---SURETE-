@@ -100,36 +100,6 @@ header p {
     color: #4b5563;
 }
 
-#rapportSection {
-    display: none;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-#rapportIframe {
-    width: 95%;
-    height: 75vh;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-#backButton {
-    margin-top: 18px;
-    padding: 12px 26px;
-    font-size: 1.1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#backButton:hover {
-    background-color: #1b4ed6;
-}
-
 .contacts {
     background: rgba(255,255,255,0.9);
     padding: 28px 22px;
@@ -201,38 +171,38 @@ header p {
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenu sur le Portail SÛRETÉ SITARAIL</h1>
+    <h1>🚂 Portail SÛRETÉ SITARAIL</h1>
     <p>Choisissez un rapport ou consultez les contacts utiles</p>
 </header>
 
 <!-- Section d'accueil -->
 <div id="homeContent">
 
-    <!-- 4 RAPPORTS -->
+    <!-- NOS 4 RAPPORTS -->
     <div class="section">
         <h2>📊 Nos Rapports</h2>
         <div class="cards-container">
             
-            <!-- RAPPORT 1 -->
-            <div class="card" onclick="chargerRapport('niveauAlerte')">
+            <!-- RAPPORT 1 : NIVEAU D'ALERTE -->
+            <div class="card" onclick="ouvrirRapport('niveauAlerte')">
                 <h3>🚨 Niveau d'Alerte</h3>
                 <p>Suivi du niveau d'alerte en temps réel</p>
             </div>
             
-            <!-- RAPPORT 2 -->
-            <div class="card" onclick="chargerRapport('tableauDeBord')">
+            <!-- RAPPORT 2 : TABLEAU DE BORD -->
+            <div class="card" onclick="ouvrirRapport('tableauDeBord')">
                 <h3>📈 Tableau de bord Sûreté</h3>
-                <p>Analyse des indicateurs de sûreté</p>
+                <p>Analyse des indicateurs de sûreté réseau</p>
             </div>
             
-            <!-- RAPPORT 3 -->
-            <div class="card" onclick="chargerRapport('videosurveillance')">
+            <!-- RAPPORT 3 : VIDÉOSURVEILLANCE -->
+            <div class="card" onclick="ouvrirRapport('videosurveillance')">
                 <h3>📹 Vidéosurveillance CCTV</h3>
-                <p>Rapport vidéosurveillance réseau</p>
+                <p>Rapport vidéosurveillance du réseau</p>
             </div>
             
             <!-- RAPPORT 4 : QUIPUX -->
-            <div class="card" onclick="chargerRapport('relevesQuipux')">
+            <div class="card" onclick="ouvrirRapport('relevesQuipux')" style="border: 3px solid #10b981;">
                 <h3>📋 Relevés QUIPUX SITARAIL</h3>
                 <p>Contraventions véhicules SITARAIL</p>
             </div>
@@ -240,7 +210,7 @@ header p {
         </div>
     </div>
 
-    <!-- Contacts -->
+    <!-- CONTACTS UTILES -->
     <div class="contacts">
         <h2>📞 Contacts Utiles</h2>
         <div class="contact-grid">
@@ -267,14 +237,8 @@ header p {
 
 </div>
 
-<!-- Section Rapport (TOUS les 4 rapports) -->
-<div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
-    <button id="backButton" onclick="retourAccueil()">← Retour à l'Accueil</button>
-</div>
-
 <script>
-// ✅ LES 4 RAPPORTS DANS UN SEUL OBJET
+// ✅ LES 4 RAPPORTS - LIENS DIRECTS (NOUVEAUX ONGLETS)
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
@@ -282,18 +246,11 @@ const rapports = {
     relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
 };
 
-function chargerRapport(key) {
-    document.getElementById("homeContent").style.display = "none";
-    document.getElementById("rapportSection").style.display = "block";
-    document.getElementById("rapportIframe").src = rapports[key];
+function ouvrirRapport(key) {
+    window.open(rapports[key], '_blank');
 }
 
-function retourAccueil() {
-    document.getElementById("rapportSection").style.display = "none";
-    document.getElementById("homeContent").style.display = "block";
-    document.getElementById("rapportIframe").src = "";
-}
-
+// Horloge temps réel
 function updateDateTime() {
     const now = new Date();
     const date = now.toLocaleDateString("fr-FR");
