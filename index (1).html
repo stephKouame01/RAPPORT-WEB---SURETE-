@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <title>Portail SÛRETÉ SITARAIL - Accueil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!-- TOUS VOS STYLES RESTENT IDENTIQUES -->
 <style>
-/* TOUS VOS STYLES ORIGINAUX INCHANGÉS */
 body, html {
     margin: 0;
     padding: 0;
@@ -14,11 +13,9 @@ body, html {
     width: 100%;
     height: 100%;
 }
-
 body {
     background: linear-gradient(135deg, #a8c0ff, #3f2b96);
 }
-
 #dateTimeDisplay {
     background: rgba(255,255,255,0.8);
     color: #2c3e50;
@@ -31,7 +28,6 @@ body {
     top: 0;
     z-index: 100;
 }
-
 header {
     text-align: center;
     padding: 30px 15px;
@@ -39,32 +35,27 @@ header {
     border-bottom: 2px solid #4f8ef7;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 header h1 {
     font-size: 2.8rem;
     margin: 0;
     color: #2c3e50;
 }
-
 header p {
     font-size: 1.15rem;
     margin: 8px 0;
     color: #4b5563;
 }
-
 .section {
     margin: 30px 0;
     padding: 0 20px;
     text-align: center;
 }
-
 .section h2 {
     font-size: 2rem;
     color: #ffffff;
     margin-bottom: 15px;
     text-shadow: 0px 0px 8px rgba(0,0,0,0.4);
 }
-
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +63,6 @@ header p {
     gap: 25px;
     margin-top: 15px;
 }
-
 .card {
     background: #ffffff;
     width: 300px;
@@ -83,30 +73,25 @@ header p {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .card:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
-
 .card h3 {
     margin-top: 0;
     font-size: 1.5rem;
     color: #2563eb;
 }
-
 .card p {
     margin-top: 8px;
     font-size: 1rem;
     color: #4b5563;
 }
-
 #rapportSection {
     display: none;
     padding: 25px 15px;
     text-align: center;
 }
-
 #rapportIframe {
     width: 95%;
     height: 75vh;
@@ -114,7 +99,6 @@ header p {
     border-radius: 8px;
     background: #ffffff;
 }
-
 #backButton {
     margin-top: 18px;
     padding: 12px 26px;
@@ -126,11 +110,9 @@ header p {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 #backButton:hover {
     background-color: #1b4ed6;
 }
-
 .contacts {
     background: rgba(255,255,255,0.9);
     padding: 28px 22px;
@@ -139,20 +121,17 @@ header p {
     margin: 30px auto 50px;
     border: 1px solid #d1d5db;
 }
-
 .contacts h2 {
     text-align: center;
     color: #2563eb;
     font-size: 1.9rem;
     margin-bottom: 18px;
 }
-
 .contact-grid {
     display: grid;
     gap: 18px;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
-
 .contact-card {
     padding: 18px;
     border-radius: 10px;
@@ -160,24 +139,20 @@ header p {
     border: 1px solid #d1d5db;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .contact-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.10);
 }
-
 .contact-country {
     font-size: 1.3rem;
     font-weight: bold;
     color: #1f2937;
 }
-
 .contact-person {
     margin-top: 6px;
     font-size: 1rem;
     line-height: 1.6;
 }
-
 .contact-person a {
     color: #2563eb;
     text-decoration: none;
@@ -186,14 +161,12 @@ header p {
 .contact-person a:hover {
     text-decoration: underline;
 }
-
 @media (max-width: 768px) {
     header h1 { font-size: 2.4rem; }
     .section h2 { font-size: 1.8rem; }
     .cards-container { gap: 15px; }
 }
 </style>
-
 </head>
 <body>
 
@@ -207,8 +180,6 @@ header p {
 
 <!-- Section d'accueil (Rapports + Contacts) -->
 <div id="homeContent">
-
-    <!-- ✅ 4 RAPPORTS AVEC QUIPUX INTÉGRÉ -->
     <div class="section">
         <h2>📊 Nos Rapports</h2>
         <div class="cards-container">
@@ -216,25 +187,22 @@ header p {
                 <h3>Niveau d'Alerte</h3>
                 <p>Suivi du niveau d'alerte en temps réel</p>
             </div>
-
             <div class="card" onclick="chargerRapport('tableauDeBord')">
                 <h3>Tableau de bord Sûreté</h3>
                 <p>Analyse des indicateurs de sûreté du réseau</p>
             </div>
-
             <div class="card" onclick="chargerRapport('videosurveillance')">
                 <h3>Vidéosurveillance CCTV</h3>
                 <p>Rapport vidéosurveillance du réseau</p>
             </div>
-
-            <div class="card" onclick="ouvrirQuipux()">
+            <!-- ✅ QUIPUX CORRIGÉ : même logique que les autres -->
+            <div class="card" onclick="chargerRapport('relevesQuipux')">
                 <h3>📋 Relevés QUIPUX SITARAIL</h3>
                 <p>Données en rapport avec les contraventions des véhicules de SITARAIL</p>
             </div>
         </div>
     </div>
 
-    <!-- Section Contacts -->
     <div class="contacts">
         <h2>📞 Contacts Utiles</h2>
         <div class="contact-grid">
@@ -247,7 +215,6 @@ header p {
                     📧 <a href="mailto:tchessiehi.yoro@sitarail.com">tchessiehi.yoro@sitarail.com</a>
                 </div>
             </div>
-
             <div class="contact-card">
                 <div class="contact-country">🇧🇫 Burkina Faso</div>
                 <div class="contact-person">
@@ -259,29 +226,23 @@ header p {
             </div>
         </div>
     </div>
-
 </div>
 
-<!-- Section Rapport affiché (pour les 3 autres rapports) -->
+<!-- Section Rapport affiché -->
 <div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
     <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
     <button id="backButton" onclick="retourAccueil()">← Retour à l'Accueil</button>
 </div>
 
 <script>
-// 📌 Rapports iframe (3 premiers)
+<!-- 🔥 PROBLÈME RÉSOLU : QUIPUX AJOUTÉ DANS rapports -->
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
 };
 
-// ✅ FONCTION QUIPUX : ouvre page dédiée
-function ouvrirQuipux() {
-    window.open('releves-quipux.html', '_blank');
-}
-
-// 📍 Fonctions existantes
 function chargerRapport(key) {
     document.getElementById("homeContent").style.display = "none";
     document.getElementById("rapportSection").style.display = "block";
