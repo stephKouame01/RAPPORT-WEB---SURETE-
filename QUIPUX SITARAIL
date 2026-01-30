@@ -1,317 +1,148 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Portail SÛRETÉ SITARAIL - Accueil</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>RELEVÉS QUIPUX SITARAIL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- TOUS VOS STYLES RESTENT IDENTIQUES -->
-<style>
-/* === Styles Globaux === */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    width: 100%;
-    height: 100%;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            min-height: 100vh;
+        }
 
-/* === Arrière‑plan dégradé très doux === */
-body {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
+        /* Barre Date/Heure */
+        #dateTimeDisplay {
+            background: rgba(255,255,255,0.9);
+            color: #2c3e50;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 12px 0;
+            border-bottom: 2px solid #4f8ef7;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-/* === Barre de date et heure === */
-#dateTimeDisplay {
-    background: rgba(255,255,255,0.8);
-    color: #2c3e50;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 12px 0;
-    border-bottom: 2px solid #4f8ef7;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+        header {
+            background: rgba(255,255,255,0.95);
+            color: #2c3e50;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
 
-/* === Header === */
-header {
-    text-align: center;
-    padding: 30px 15px;
-    background: rgba(255,255,255,0.9);
-    border-bottom: 2px solid #4f8ef7;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
 
-header h1 {
-    font-size: 2.8rem;
-    margin: 0;
-    color: #2c3e50;
-}
+        header p {
+            font-size: 1.15rem;
+            margin: 8px 0 0 0;
+            color: #4b5563;
+        }
 
-header p {
-    font-size: 1.15rem;
-    margin: 8px 0;
-    color: #4b5563;
-}
+        /* Container iframe */
+        .rapport-container {
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+        }
 
-/* === Section Rapports === */
-.section {
-    margin: 30px 0;
-    padding: 0 20px;
-    text-align: center;
-}
+        iframe {
+            width: 98%;
+            max-width: 1400px;
+            height: 80vh;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
 
-.section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 0px 0px 8px rgba(0,0,0,0.4);
-}
+        /* Bouton Retour Portail */
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #2563eb, #1b4ed6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 15px;
-}
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.4);
+        }
 
-.card {
-    background: #ffffff;
-    width: 300px;
-    padding: 22px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95rem;
+            color: #ffffff;
+            background: rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
 
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.card h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: #2563eb;
-}
-
-.card p {
-    margin-top: 8px;
-    font-size: 1rem;
-    color: #4b5563;
-}
-
-/* === Rapport Section === */
-#rapportSection {
-    display: none;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-#rapportIframe {
-    width: 95%;
-    height: 75vh;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-/* === Bouton Retour === */
-#backButton {
-    margin-top: 18px;
-    padding: 12px 26px;
-    font-size: 1.1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#backButton:hover {
-    background-color: #1b4ed6;
-}
-
-/* === Contacts Utiles === */
-.contacts {
-    background: rgba(255,255,255,0.9);
-    padding: 28px 22px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 30px auto 50px;
-    border: 1px solid #d1d5db;
-}
-
-.contacts h2 {
-    text-align: center;
-    color: #2563eb;
-    font-size: 1.9rem;
-    margin-bottom: 18px;
-}
-
-.contact-grid {
-    display: grid;
-    gap: 18px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.contact-card {
-    padding: 18px;
-    border-radius: 10px;
-    background: #f9fafb;
-    border: 1px solid #d1d5db;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
-}
-
-.contact-country {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #1f2937;
-}
-
-.contact-person {
-    margin-top: 6px;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.contact-person a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-}
-.contact-person a:hover {
-    text-decoration: underline;
-}
-
-/* === Responsive === */
-@media (max-width: 768px) {
-    header h1 { font-size: 2.4rem; }
-    .section h2 { font-size: 1.8rem; }
-    .cards-container { gap: 15px; }
-}
-</style>
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            iframe { height: 70vh; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Date & Heure -->
+<!-- Date & Heure en temps réel -->
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenu sur le Portail SÛRETÉ SITARAIL</h1>
-    <p>Tous nos rapports Power BI</p>
+    <h1>📋 RELEVÉS QUIPUX SITARAIL</h1>
+    <p>Données opérationnelles SITARAIL – Power BI</p>
 </header>
 
-<!-- Section d'accueil (Rapports + Contacts) -->
-<div id="homeContent">
-
-    <!-- Section Rapports ✅ 4 RAPPORTS MAINTENANT -->
-    <div class="section">
-        <h2>📊 Nos Rapports</h2>
-        <div class="cards-container">
-            <div class="card" onclick="chargerRapport('niveauAlerte')">
-                <h3>Niveau d'Alerte</h3>
-                <p>Suivi du niveau d'alerte en temps réel</p>
-            </div>
-
-            <div class="card" onclick="chargerRapport('tableauDeBord')">
-                <h3>Tableau de bord Sûreté</h3>
-                <p>Analyse des indicateurs de sûreté du réseau</p>
-            </div>
-
-            <div class="card" onclick="chargerRapport('videosurveillance')">
-                <h3>Vidéosurveillance CCTV</h3>
-                <p>Rapport vidéosurveillance du réseau</p>
-            </div>
-
-            <!-- 🔥 NOUVEAU RAPPORT AJOUTÉ ICI (4ème position) -->
-            <div class="card" onclick="chargerRapport('relevesQuipux')">
-                <h3>Relevés QUIPUX SITARAIL</h3>
-                <p>Données opérationnelles QUIPUX</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section Contacts (inchangée) -->
-    <div class="contacts">
-        <h2>📞 Contacts Utiles</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-country">🇨🇮 Côte d'Ivoire</div>
-                <div class="contact-person">
-                    <strong>M. Yoro Louis</strong><br>
-                    Chef Division Sûreté<br>
-                    📞 <a href="tel:+2250747974398">07 47 97 43 98</a><br>
-                    📧 <a href="mailto:tchessiehi.yoro@sitarail.com">tchessiehi.yoro@sitarail.com</a>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-country">🇧🇫 Burkina Faso</div>
-                <div class="contact-person">
-                    <strong>M. Sorgho Ousmane</strong><br>
-                    Chef Division Sûreté<br>
-                    📞 <a href="tel:+22676560431">+226 76 56 04 31</a><br>
-                    📧 <a href="mailto:ousmane.sorgho@sitarail.com">ousmane.sorgho@sitarail.com</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="rapport-container">
+    <iframe 
+        title="RELEVÉS QUIPUX SITARAIL"
+        src="https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+        allowfullscreen="true">
+    </iframe>
+    
+    <!-- Bouton retour vers portail principal -->
+    <a href="index.html" class="back-button">← Retour Portail Sûreté</a>
 </div>
 
-<!-- Section Rapport affiché -->
-<div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
-    <button id="backButton" onclick="retourAccueil()">← Retour à l'Accueil</button>
-</div>
+<footer>
+    © 2026 – RELEVÉS QUIPUX SITARAIL | Portail Sûreté SITARAIL
+</footer>
 
 <script>
-// 📌 Données des rapports ✅ NOUVEAU RAPPORT AJOUTÉ
-const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    
-    // 🔥 NOUVEAU RAPPORT QUIPUX AJOUTÉ
-    relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-};
-
-// 📍 Affiche le rapport dans l'iframe
-function chargerRapport(key) {
-    document.getElementById("homeContent").style.display = "none";
-    document.getElementById("rapportSection").style.display = "block";
-    document.getElementById("rapportIframe").src = rapports[key];
-}
-
-// 📍 Retour à l'accueil
-function retourAccueil() {
-    document.getElementById("rapportSection").style.display = "none";
-    document.getElementById("homeContent").style.display = "block";
-    document.getElementById("rapportIframe").src = "";
-}
-
-// 📅 Affiche date & heure → mise à jour chaque seconde
-function updateDateTime() {
-    const now = new Date();
-    const date = now.toLocaleDateString("fr-FR");
-    const time = now.toLocaleTimeString("fr-FR");
-    document.getElementById("dateTimeDisplay").innerText = `📅 ${date} ⏰ ${time}`;
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
+    // Horloge en temps réel
+    function updateDateTime() {
+        const now = new Date();
+        const date = now.toLocaleDateString("fr-FR", { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        const time = now.toLocaleTimeString("fr-FR");
+        document.getElementById("dateTimeDisplay").innerText = `📅 ${date} ⏰ ${time}`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
 </script>
 
 </body>
