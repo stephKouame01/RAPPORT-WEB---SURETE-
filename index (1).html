@@ -5,9 +5,8 @@
 <title>Portail SÛRETÉ SITARAIL - Accueil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- TOUS VOS STYLES RESTENT IDENTIQUES -->
 <style>
-/* === Styles Globaux === */
+/* TOUS VOS STYLES ORIGINX RESTENT IDENTIQUES */
 body, html {
     margin: 0;
     padding: 0;
@@ -16,12 +15,10 @@ body, html {
     height: 100%;
 }
 
-/* === Arrière‑plan dégradé très doux === */
 body {
     background: linear-gradient(135deg, #a8c0ff, #3f2b96);
 }
 
-/* === Barre de date et heure === */
 #dateTimeDisplay {
     background: rgba(255,255,255,0.8);
     color: #2c3e50;
@@ -35,7 +32,6 @@ body {
     z-index: 100;
 }
 
-/* === Header === */
 header {
     text-align: center;
     padding: 30px 15px;
@@ -56,7 +52,6 @@ header p {
     color: #4b5563;
 }
 
-/* === Section Rapports === */
 .section {
     margin: 30px 0;
     padding: 0 20px;
@@ -106,7 +101,6 @@ header p {
     color: #4b5563;
 }
 
-/* === Rapport Section === */
 #rapportSection {
     display: none;
     padding: 25px 15px;
@@ -121,7 +115,6 @@ header p {
     background: #ffffff;
 }
 
-/* === Bouton Retour === */
 #backButton {
     margin-top: 18px;
     padding: 12px 26px;
@@ -138,7 +131,6 @@ header p {
     background-color: #1b4ed6;
 }
 
-/* === Contacts Utiles === */
 .contacts {
     background: rgba(255,255,255,0.9);
     padding: 28px 22px;
@@ -195,15 +187,14 @@ header p {
     text-decoration: underline;
 }
 
-/* === Responsive === */
 @media (max-width: 768px) {
     header h1 { font-size: 2.4rem; }
     .section h2 { font-size: 1.8rem; }
     .cards-container { gap: 15px; }
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- Date & Heure -->
@@ -217,7 +208,7 @@ header p {
 <!-- Section d'accueil (Rapports + Contacts) -->
 <div id="homeContent">
 
-    <!-- Section Rapports ✅ 4 RAPPORTS MAINTENANT -->
+    <!-- 🔥 4 RAPPORTS MAINTENANT (QUIPUX AJOUTÉ) -->
     <div class="section">
         <h2>📊 Nos Rapports</h2>
         <div class="cards-container">
@@ -236,9 +227,9 @@ header p {
                 <p>Rapport vidéosurveillance du réseau</p>
             </div>
 
-            <!-- 🔥 NOUVEAU RAPPORT AJOUTÉ ICI (4ème position) -->
+            <!-- ✅ NOUVEAU : RELEVÉS QUIPUX (4ème position) -->
             <div class="card" onclick="chargerRapport('relevesQuipux')">
-                <h3>Relevés QUIPUX SITARAIL</h3>
+                <h3>📋 Relevés QUIPUX SITARAIL</h3>
                 <p>Données opérationnelles QUIPUX</p>
             </div>
         </div>
@@ -279,31 +270,29 @@ header p {
 </div>
 
 <script>
-// 📌 Données des rapports ✅ NOUVEAU RAPPORT AJOUTÉ
+// 🔥 RAPPORTS AVEC QUIPUX AJOUTÉ
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     
-    // 🔥 NOUVEAU RAPPORT QUIPUX AJOUTÉ
+    // ✅ NOUVEAU RAPPORT QUIPUX
     relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
 };
 
-// 📍 Affiche le rapport dans l'iframe
+// Fonctions inchangées
 function chargerRapport(key) {
     document.getElementById("homeContent").style.display = "none";
     document.getElementById("rapportSection").style.display = "block";
     document.getElementById("rapportIframe").src = rapports[key];
 }
 
-// 📍 Retour à l'accueil
 function retourAccueil() {
     document.getElementById("rapportSection").style.display = "none";
     document.getElementById("homeContent").style.display = "block";
     document.getElementById("rapportIframe").src = "";
 }
 
-// 📅 Affiche date & heure → mise à jour chaque seconde
 function updateDateTime() {
     const now = new Date();
     const date = now.toLocaleDateString("fr-FR");
@@ -316,3 +305,4 @@ updateDateTime();
 
 </body>
 </html>
++
