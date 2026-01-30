@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* TOUS VOS STYLES ORIGINX RESTENT IDENTIQUES */
+/* TOUS VOS STYLES ORIGINAUX INCHANGÉS */
 body, html {
     margin: 0;
     padding: 0;
@@ -208,7 +208,7 @@ header p {
 <!-- Section d'accueil (Rapports + Contacts) -->
 <div id="homeContent">
 
-    <!-- 🔥 4 RAPPORTS MAINTENANT (QUIPUX AJOUTÉ) -->
+    <!-- ✅ 4 RAPPORTS AVEC QUIPUX INTÉGRÉ -->
     <div class="section">
         <h2>📊 Nos Rapports</h2>
         <div class="cards-container">
@@ -227,15 +227,15 @@ header p {
                 <p>Rapport vidéosurveillance du réseau</p>
             </div>
 
-            <!-- ✅ NOUVEAU : RELEVÉS QUIPUX (4ème position) -->
-            <div class="card" onclick="chargerRapport('relevesQuipux')">
+            <!-- ✅ QUIPUX : OUVERTURE PAGE DÉDIÉE -->
+            <div class="card" onclick="ouvrirQuipux()">
                 <h3>📋 Relevés QUIPUX SITARAIL</h3>
                 <p>Données opérationnelles QUIPUX</p>
             </div>
         </div>
     </div>
 
-    <!-- Section Contacts (inchangée) -->
+    <!-- Section Contacts -->
     <div class="contacts">
         <h2>📞 Contacts Utiles</h2>
         <div class="contact-grid">
@@ -263,24 +263,26 @@ header p {
 
 </div>
 
-<!-- Section Rapport affiché -->
+<!-- Section Rapport affiché (pour les 3 autres rapports) -->
 <div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
     <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
     <button id="backButton" onclick="retourAccueil()">← Retour à l'Accueil</button>
 </div>
 
 <script>
-// 🔥 RAPPORTS AVEC QUIPUX AJOUTÉ
+// 📌 Rapports iframe (3 premiers)
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    
-    // ✅ NOUVEAU RAPPORT QUIPUX
-    relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
 };
 
-// Fonctions inchangées
+// ✅ FONCTION QUIPUX : ouvre page dédiée
+function ouvrirQuipux() {
+    window.open('releves-quipux.html', '_blank');
+}
+
+// 📍 Fonctions existantes
 function chargerRapport(key) {
     document.getElementById("homeContent").style.display = "none";
     document.getElementById("rapportSection").style.display = "block";
@@ -305,4 +307,3 @@ updateDateTime();
 
 </body>
 </html>
-+
