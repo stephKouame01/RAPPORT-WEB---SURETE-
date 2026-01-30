@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-/* === Styles Globaux === */
 body, html {
     margin: 0;
     padding: 0;
@@ -16,12 +14,10 @@ body, html {
     height: 100%;
 }
 
-/* === Arrière‑plan dégradé très doux === */
 body {
     background: linear-gradient(135deg, #a8c0ff, #3f2b96);
 }
 
-/* === Barre de date et heure === */
 #dateTimeDisplay {
     background: rgba(255,255,255,0.8);
     color: #2c3e50;
@@ -35,7 +31,6 @@ body {
     z-index: 100;
 }
 
-/* === Header === */
 header {
     text-align: center;
     padding: 30px 15px;
@@ -56,7 +51,6 @@ header p {
     color: #4b5563;
 }
 
-/* === Section Rapports === */
 .section {
     margin: 30px 0;
     padding: 0 20px;
@@ -106,39 +100,6 @@ header p {
     color: #4b5563;
 }
 
-/* === Rapport Section === */
-#rapportSection {
-    display: none;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-#rapportIframe {
-    width: 95%;
-    height: 75vh;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-/* === Bouton Retour === */
-#backButton {
-    margin-top: 18px;
-    padding: 12px 26px;
-    font-size: 1.1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#backButton:hover {
-    background-color: #1b4ed6;
-}
-
-/* === Contacts Utiles === */
 .contacts {
     background: rgba(255,255,255,0.9);
     padding: 28px 22px;
@@ -191,17 +152,16 @@ header p {
     text-decoration: none;
     font-weight: 600;
 }
+
 .contact-person a:hover {
     text-decoration: underline;
 }
 
-/* === Responsive === */
 @media (max-width: 768px) {
     header h1 { font-size: 2.4rem; }
     .section h2 { font-size: 1.8rem; }
     .cards-container { gap: 15px; }
 }
-
 </style>
 
 </head>
@@ -211,41 +171,51 @@ header p {
 <div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
 
 <header>
-    <h1>Bienvenu sur le Portail SÛRETÉ SITARAIL</h1>
+    <h1>🚂 Portail SÛRETÉ SITARAIL</h1>
     <p>Choisissez un rapport ou consultez les contacts utiles</p>
 </header>
 
-
-<!-- Section d'accueil (Rapports + Contacts) -->
+<!-- Section d'accueil -->
 <div id="homeContent">
 
-    <!-- Section Rapports -->
+    <!-- NOS 4 RAPPORTS -->
     <div class="section">
         <h2>📊 Nos Rapports</h2>
         <div class="cards-container">
-            <div class="card" onclick="chargerRapport('niveauAlerte')">
-                <h3>Niveau d’Alerte</h3>
-                <p>Suivi du niveau d’alerte en temps réel</p>
+            
+            <!-- RAPPORT 1 : NIVEAU D'ALERTE -->
+            <div class="card" onclick="ouvrirRapport('niveauAlerte')">
+                <h3>🚨 Niveau d'Alerte</h3>
+                <p>Suivi du niveau d'alerte en temps réel</p>
             </div>
-
-            <div class="card" onclick="chargerRapport('tableauDeBord')">
-                <h3>Tableau de bord Sûreté</h3>
-                <p>Analyse des indicateurs de sûreté du réseau</p>
+            
+            <!-- RAPPORT 2 : TABLEAU DE BORD -->
+            <div class="card" onclick="ouvrirRapport('tableauDeBord')">
+                <h3>📈 Tableau de bord Sûreté</h3>
+                <p>Analyse des indicateurs de sûreté réseau</p>
             </div>
-
-            <div class="card" onclick="chargerRapport('videosurveillance')">
-                <h3>Vidéosurveillance CCTV</h3>
+            
+            <!-- RAPPORT 3 : VIDÉOSURVEILLANCE -->
+            <div class="card" onclick="ouvrirRapport('videosurveillance')">
+                <h3>📹 Vidéosurveillance CCTV</h3>
                 <p>Rapport vidéosurveillance du réseau</p>
             </div>
+            
+            <!-- RAPPORT 4 : QUIPUX -->
+            <div class="card" onclick="ouvrirRapport('relevesQuipux')" style="border: 3px solid #10b981;">
+                <h3>📋 Relevés QUIPUX SITARAIL</h3>
+                <p>Contraventions véhicules SITARAIL</p>
+            </div>
+            
         </div>
     </div>
 
-    <!-- Section Contacts -->
+    <!-- CONTACTS UTILES -->
     <div class="contacts">
         <h2>📞 Contacts Utiles</h2>
         <div class="contact-grid">
             <div class="contact-card">
-                <div class="contact-country">🇨🇮v Côte d’Ivoire</div>
+                <div class="contact-country">🇨🇮 Côte d'Ivoire</div>
                 <div class="contact-person">
                     <strong>M. Yoro Louis</strong><br>
                     Chef Division Sûreté<br>
@@ -253,9 +223,8 @@ header p {
                     📧 <a href="mailto:tchessiehi.yoro@sitarail.com">tchessiehi.yoro@sitarail.com</a>
                 </div>
             </div>
-
             <div class="contact-card">
-                <div class="contact-country">🇧🇫a Burkina Faso</div>
+                <div class="contact-country">🇧🇫 Burkina Faso</div>
                 <div class="contact-person">
                     <strong>M. Sorgho Ousmane</strong><br>
                     Chef Division Sûreté<br>
@@ -268,35 +237,20 @@ header p {
 
 </div>
 
-<!-- Section Rapport affiché -->
-<div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
-    <button id="backButton" onclick="retourAccueil()">← Retour à l’Accueil</button>
-</div>
-
 <script>
-// 📌 Données des rapports
+// ✅ LES 4 RAPPORTS - LIENS DIRECTS (NOUVEAUX ONGLETS)
 const rapports = {
     niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
     tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    relevesQuipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
 };
 
-// 📍 Affiche le rapport dans l'iframe
-function chargerRapport(key) {
-    document.getElementById("homeContent").style.display = "none";
-    document.getElementById("rapportSection").style.display = "block";
-    document.getElementById("rapportIframe").src = rapports[key];
+function ouvrirRapport(key) {
+    window.open(rapports[key], '_blank');
 }
 
-// 📍 Retour à l'accueil
-function retourAccueil() {
-    document.getElementById("rapportSection").style.display = "none";
-    document.getElementById("homeContent").style.display = "block";
-    document.getElementById("rapportIframe").src = "";
-}
-
-// 📅 Affiche date & heure → mise à jour chaque seconde
+// Horloge temps réel
 function updateDateTime() {
     const now = new Date();
     const date = now.toLocaleDateString("fr-FR");
@@ -305,7 +259,6 @@ function updateDateTime() {
 }
 setInterval(updateDateTime, 1000);
 updateDateTime();
-
 </script>
 
 </body>
