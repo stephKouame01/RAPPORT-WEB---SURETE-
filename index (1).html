@@ -3,15 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portail Sûreté SITARAIL</title>
+<title>⚠️ Niveau d'Alerte Sûreté</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
+    margin:0;
     font-family:'Segoe UI',Arial,sans-serif;
-    background:linear-gradient(135deg,#f4f6f8,#e0e7ff);
-    min-height:100vh;
+    background:linear-gradient(135deg,#f4f6f8,#fee2e2);
 }
 
 header{
@@ -21,30 +19,7 @@ header{
     text-align:center;
 }
 
-.tabs{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-    padding:20px;
-}
-
-.tabs button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    background:#374151;
-    color:white;
-    cursor:pointer;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.tabs button.active{
-    background:#2563eb;
-}
-
-.content{
+.container{
     max-width:1600px;
     margin:auto;
     padding:20px;
@@ -52,22 +27,10 @@ header{
 
 iframe{
     width:100%;
-    height:80vh;
+    height:85vh;
     border:none;
     border-radius:15px;
     box-shadow:0 15px 40px rgba(0,0,0,0.2);
-    display:none;
-}
-
-iframe.active{
-    display:block;
-}
-
-footer{
-    text-align:center;
-    padding:25px;
-    font-size:13px;
-    color:#777;
 }
 </style>
 </head>
@@ -75,58 +38,17 @@ footer{
 <body>
 
 <header>
-<h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
-<p>CI & BF – Rapports Power BI</p>
+<h1>⚠️ NIVEAU D'ALERTE SÛRETÉ</h1>
+<p>Rapport Power BI SITARAIL</p>
 </header>
 
-<div class="tabs">
-<button class="active" onclick="showReport('r1',this)">⚠️ Niveau d'Alerte</button>
-<button onclick="showReport('r2',this)">📊 Sûreté CI & BF</button>
-<button onclick="showReport('r3',this)">📹 CCTV</button>
-<button onclick="showReport('r4',this)">📋 Relevés Quipux</button>
+<div class="container">
+<iframe
+title="NIVEAU D'ALERTE SURETE"
+src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+allowfullscreen>
+</iframe>
 </div>
-
-<div class="content">
-
-<!-- Remplace les liens par tes liens PUBLISH TO WEB (view?r=...) -->
-
-<iframe id="r1" class="active"
-src="COLLE_LIEN_VIEW_R_1"
-allowfullscreen></iframe>
-
-<iframe id="r2"
-src="COLLE_LIEN_VIEW_R_2"
-allowfullscreen></iframe>
-
-<iframe id="r3"
-src="COLLE_LIEN_VIEW_R_3"
-allowfullscreen></iframe>
-
-<iframe id="r4"
-src="COLLE_LIEN_VIEW_R_4"
-allowfullscreen></iframe>
-
-</div>
-
-<footer>
-© 2026 SITARAIL – Portail Sûreté
-</footer>
-
-<script>
-function showReport(id,btn){
-
-document.querySelectorAll("iframe")
-.forEach(f=>f.classList.remove("active"));
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll(".tabs button")
-.forEach(b=>b.classList.remove("active"));
-
-btn.classList.add("active");
-}
-</script>
 
 </body>
 </html>
