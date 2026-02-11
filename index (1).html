@@ -1,169 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>🚂 Portail Sûreté SITARAIL - 4 Rapports</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f6f8 0%, #e0e7ff 100%);
-            min-height: 100vh;
-        }
-        header {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            color: white;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-        }
-        header h1 { 
-            font-size: 2.8rem; 
-            font-weight: 300; 
-            margin-bottom: 0.8rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        header p { opacity: 0.95; font-size: 1.3rem; }
-        
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 2rem;
-            flex-wrap: wrap;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-        }
-        .tabs button {
-            padding: 14px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #1f2937, #374151);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            min-width: 240px;
-            position: relative;
-        }
-        .tabs button.active {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37,99,235,0.4);
-        }
-        .tabs button:hover:not(.active) {
-            background: linear-gradient(135deg, #374151, #4b5563);
-            transform: translateY(-1px);
-        }
-        .status-ok { border-left: 5px solid #10b981; }
-        .status-wait { border-left: 5px solid #f59e0b; }
-        
-        .content { max-width: 1600px; margin: 0 auto; padding: 2rem; }
-        .loading {
-            display: none;
-            text-align: center;
-            color: #6b7280;
-            font-size: 1.4rem;
-            margin: 4rem 0;
-            padding: 2rem;
-            background: rgba(255,255,255,0.9);
-            border-radius: 12px;
-        }
-        iframe {
-            width: 100%;
-            height: 78vh;
-            min-height: 650px;
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            transition: all 0.4s ease;
-        }
-        footer {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.9);
-            margin-top: 3rem;
-        }
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .tabs button { min-width: 200px; padding: 12px 20px; font-size: 14px; }
-            iframe { height: 72vh; min-height: 550px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portail Sûreté SITARAIL</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body{
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg,#f4f6f8,#e0e7ff);
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(135deg,#1f2937,#374151);
+    color:white;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+header h1{
+    font-weight:300;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+/* TABS */
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    padding:25px;
+}
+
+.tabs button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+    background:#374151;
+    color:white;
+    transition:0.3s;
+    min-width:220px;
+}
+
+.tabs button:hover{
+    background:#4b5563;
+}
+
+.tabs button.active{
+    background:#2563eb;
+    box-shadow:0 5px 15px rgba(37,99,235,0.4);
+}
+
+/* CONTENT */
+.content{
+    max-width:1600px;
+    margin:auto;
+    padding:20px;
+}
+
+iframe{
+    width:100%;
+    height:80vh;
+    border:none;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    transition:opacity 0.4s ease;
+}
+
+/* LOADER */
+.loader{
+    text-align:center;
+    font-size:18px;
+    color:#555;
+    margin:20px 0;
+    display:none;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    color:#777;
+    font-size:13px;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
-        <p>CI & BF – Tous les Rapports Power BI (4/4 collectés)</p>
-    </header>
 
-    <div class="tabs">
-        <button class="status-wait" onclick="changerRapport('cctv', this)" title="Besoin publication publique Power BI">📹 CCTV SITARAIL ⏳</button>
-        <button class="status-wait" onclick="changerRapport('quipux', this)" title="Besoin publication publique Power BI">📋 RELEVÉS QUIPUX ⏳</button>
-        <button class="status-ok active" onclick="changerRapport('niveauAlerte', this)" title="Fonctionne parfaitement">⚠️ NIVEAU D'ALERTE ✅</button>
-        <button class="status-ok" onclick="changerRapport('sureteCIBF', this)" title="Fonctionne parfaitement">📊 SÛRETÉ CI&BF ✅</button>
-    </div>
+<header>
+    <h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
+    <p>CI & BF – Rapports Power BI</p>
+</header>
 
-    <div class="content">
-        <div id="loading" class="loading">🔄 Chargement du rapport Power BI...</div>
-        <iframe 
-            id="rapportIframe"
-            src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-            allowfullscreen 
-            allow="camera; geolocation; microphone"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
-        </iframe>
-    </div>
+<div class="tabs">
+    <button class="active" onclick="changerRapport('niveauAlerte', this)">⚠️ Niveau d'Alerte</button>
+    <button onclick="changerRapport('sureteCIBF', this)">📊 Sûreté CI & BF</button>
+    <button onclick="changerRapport('cctv', this)">📹 CCTV</button>
+    <button onclick="changerRapport('quipux', this)">📋 Relevés Quipux</button>
+</div>
 
-    <footer>
-        © 2026 – SITARAIL | Portail Sûreté Centralisé CI&BF | Powered by Power BI
-        <br><small>👈 Cliquez les onglets verts pour naviguer | Orange = publication Power BI requise</small>
-    </footer>
+<div class="content">
+    <div id="loader" class="loader">Chargement du rapport...</div>
+    <iframe id="rapportIframe"
+        src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+        allowfullscreen>
+    </iframe>
+</div>
 
-    <script>
-        const rapports = {
-            cctv: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-            quipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-            niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-            sureteCIBF: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-        };
+<footer>
+    © 2026 SITARAIL – Portail Sûreté Officiel
+</footer>
 
-        function changerRapport(rapportKey, bouton) {
-            const iframe = document.getElementById("rapportIframe");
-            const loading = document.getElementById("loading");
-            
-            // Reset iframe
-            iframe.src = '';
-            iframe.style.opacity = "0.3";
-            loading.style.display = "block";
-            
-            // Switch onglet actif
-            document.querySelectorAll(".tabs button").forEach(btn => 
-                btn.classList.remove("active"));
-            bouton.classList.add("active");
-            
-            // Load nouveau rapport
-            setTimeout(() => {
-                iframe.src = rapports[rapportKey];
-            }, 500);
-            
-            // Timeout sécurité
-            const maxWait = setTimeout(() => {
-                iframe.style.opacity = "1";
-                loading.style.display = "none";
-            }, 10000);
-            
-            iframe.onload = function() {
-                iframe.style.opacity = "1";
-                loading.style.display = "none";
-                clearTimeout(maxWait);
-            };
-        }
-    </script>
+<script>
+
+const rapports = {
+    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    sureteCIBF: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    cctv: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
+    quipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
+};
+
+function changerRapport(rapport, bouton){
+
+    const iframe = document.getElementById("rapportIframe");
+    const loader = document.getElementById("loader");
+
+    if(!rapports[rapport]) return;
+
+    loader.style.display = "block";
+    iframe.style.opacity = "0.3";
+
+    document.querySelectorAll(".tabs button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    bouton.classList.add("active");
+
+    iframe.onload = function(){
+        loader.style.display = "none";
+        iframe.style.opacity = "1";
+    };
+
+    // Ajout timestamp pour forcer le refresh
+    iframe.src = rapports[rapport] + "&t=" + new Date().getTime();
+}
+
+</script>
+
 </body>
 </html>
