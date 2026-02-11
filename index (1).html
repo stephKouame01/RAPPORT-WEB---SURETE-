@@ -6,61 +6,44 @@
 <title>Portail Sûreté SITARAIL</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg,#f4f6f8,#e0e7ff);
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(135deg,#f4f6f8,#e0e7ff);
     min-height:100vh;
 }
 
-/* HEADER */
 header{
-    background: linear-gradient(135deg,#1f2937,#374151);
+    background:linear-gradient(135deg,#1f2937,#374151);
     color:white;
     padding:30px;
     text-align:center;
-    box-shadow:0 8px 30px rgba(0,0,0,0.2);
 }
 
-header h1{
-    font-weight:300;
-    font-size:28px;
-    margin-bottom:5px;
-}
-
-/* TABS */
 .tabs{
     display:flex;
     justify-content:center;
     gap:15px;
     flex-wrap:wrap;
-    padding:25px;
+    padding:20px;
 }
 
 .tabs button{
     padding:12px 25px;
     border:none;
     border-radius:30px;
-    cursor:pointer;
-    font-weight:600;
-    font-size:14px;
     background:#374151;
     color:white;
+    cursor:pointer;
+    font-weight:600;
     transition:0.3s;
-    min-width:220px;
-}
-
-.tabs button:hover{
-    background:#4b5563;
 }
 
 .tabs button.active{
     background:#2563eb;
-    box-shadow:0 5px 15px rgba(37,99,235,0.4);
 }
 
-/* CONTENT */
 .content{
     max-width:1600px;
     margin:auto;
@@ -73,24 +56,18 @@ iframe{
     border:none;
     border-radius:15px;
     box-shadow:0 15px 40px rgba(0,0,0,0.2);
-    transition:opacity 0.4s ease;
-}
-
-/* LOADER */
-.loader{
-    text-align:center;
-    font-size:18px;
-    color:#555;
-    margin:20px 0;
     display:none;
 }
 
-/* FOOTER */
+iframe.active{
+    display:block;
+}
+
 footer{
     text-align:center;
-    padding:30px;
-    color:#777;
+    padding:25px;
     font-size:13px;
+    color:#777;
 }
 </style>
 </head>
@@ -98,62 +75,57 @@ footer{
 <body>
 
 <header>
-    <h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
-    <p>CI & BF – Rapports Power BI</p>
+<h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
+<p>CI & BF – Rapports Power BI</p>
 </header>
 
 <div class="tabs">
-    <button class="active" onclick="changerRapport('niveauAlerte', this)">⚠️ Niveau d'Alerte</button>
-    <button onclick="changerRapport('sureteCIBF', this)">📊 Sûreté CI & BF</button>
-    <button onclick="changerRapport('cctv', this)">📹 CCTV</button>
-    <button onclick="changerRapport('quipux', this)">📋 Relevés Quipux</button>
+<button class="active" onclick="showReport('r1',this)">⚠️ Niveau d'Alerte</button>
+<button onclick="showReport('r2',this)">📊 Sûreté CI & BF</button>
+<button onclick="showReport('r3',this)">📹 CCTV</button>
+<button onclick="showReport('r4',this)">📋 Relevés Quipux</button>
 </div>
 
 <div class="content">
-    <div id="loader" class="loader">Chargement du rapport...</div>
-    <iframe id="rapportIframe"
-        src="https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-        allowfullscreen>
-    </iframe>
+
+<!-- Remplace les liens par tes liens PUBLISH TO WEB (view?r=...) -->
+
+<iframe id="r1" class="active"
+src="COLLE_LIEN_VIEW_R_1"
+allowfullscreen></iframe>
+
+<iframe id="r2"
+src="COLLE_LIEN_VIEW_R_2"
+allowfullscreen></iframe>
+
+<iframe id="r3"
+src="COLLE_LIEN_VIEW_R_3"
+allowfullscreen></iframe>
+
+<iframe id="r4"
+src="COLLE_LIEN_VIEW_R_4"
+allowfullscreen></iframe>
+
 </div>
 
 <footer>
-    © 2026 SITARAIL – Portail Sûreté Officiel
+© 2026 SITARAIL – Portail Sûreté
 </footer>
 
 <script>
+function showReport(id,btn){
 
-const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    sureteCIBF: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    cctv: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    quipux: "https://app.powerbi.com/reportEmbed?reportId=815b3796-d4f4-416c-92e6-854de1eafae6&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-};
+document.querySelectorAll("iframe")
+.forEach(f=>f.classList.remove("active"));
 
-function changerRapport(rapport, bouton){
+document.getElementById(id)
+.classList.add("active");
 
-    const iframe = document.getElementById("rapportIframe");
-    const loader = document.getElementById("loader");
+document.querySelectorAll(".tabs button")
+.forEach(b=>b.classList.remove("active"));
 
-    if(!rapports[rapport]) return;
-
-    loader.style.display = "block";
-    iframe.style.opacity = "0.3";
-
-    document.querySelectorAll(".tabs button")
-        .forEach(btn => btn.classList.remove("active"));
-
-    bouton.classList.add("active");
-
-    iframe.onload = function(){
-        loader.style.display = "none";
-        iframe.style.opacity = "1";
-    };
-
-    // Ajout timestamp pour forcer le refresh
-    iframe.src = rapports[rapport] + "&t=" + new Date().getTime();
+btn.classList.add("active");
 }
-
 </script>
 
 </body>
