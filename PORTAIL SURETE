@@ -153,14 +153,14 @@
             // Changer iframe
             setTimeout(() => {
                 iframe.src = rapports[rapportKey];
-            }, 200);
+            }, 300);
             
             // Fin du chargement
             iframe.onload = function() {
                 setTimeout(() => {
                     iframe.style.opacity = "1";
                     loading.style.display = "none";
-                }, 500);
+                }, 800);
             };
         }
     </script>
