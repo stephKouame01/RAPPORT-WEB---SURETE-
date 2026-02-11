@@ -141,7 +141,8 @@
             const iframe = document.getElementById("rapportIframe");
             const loading = document.getElementById("loading");
             
-            // Animation de transition
+            // Forcer rechargement complet
+            iframe.src = '';
             iframe.style.opacity = "0.3";
             loading.style.display = "block";
             
@@ -150,17 +151,22 @@
                 btn.classList.remove("active"));
             bouton.classList.add("active");
             
-            // Changer iframe
+            // Recharger avec timestamp anti-cache
             setTimeout(() => {
-                iframe.src = rapports[rapportKey];
-            }, 300);
+                iframe.src = rapports[rapportKey] + "&_=" + Date.now();
+            }, 500);
             
-            // Fin du chargement
+            // Timeout de sécurité 10s
+            const maxWait = setTimeout(() => {
+                iframe.style.opacity = "1";
+                loading.style.display = "none";
+                clearTimeout(maxWait);
+            }, 10000);
+            
             iframe.onload = function() {
-                setTimeout(() => {
-                    iframe.style.opacity = "1";
-                    loading.style.display = "none";
-                }, 800);
+                iframe.style.opacity = "1";
+                loading.style.display = "none";
+                clearTimeout(maxWait);
             };
         }
     </script>
