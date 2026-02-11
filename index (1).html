@@ -2,310 +2,130 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portail SÛRETÉ SITARAIL - Accueil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portail Sûreté SITARAIL</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-/* === Styles Globaux === */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    width: 100%;
-    height: 100%;
+body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(135deg,#f4f6f8,#e0e7ff);
+    min-height:100vh;
 }
 
-/* === Arrière‑plan dégradé très doux === */
-body {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+header{
+    background:linear-gradient(135deg,#1f2937,#374151);
+    color:white;
+    padding:30px;
+    text-align:center;
 }
 
-/* === Barre de date et heure === */
-#dateTimeDisplay {
-    background: rgba(255,255,255,0.8);
-    color: #2c3e50;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 12px 0;
-    border-bottom: 2px solid #4f8ef7;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    padding:20px;
 }
 
-/* === Header === */
-header {
-    text-align: center;
-    padding: 30px 15px;
-    background: rgba(255,255,255,0.9);
-    border-bottom: 2px solid #4f8ef7;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.tabs button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#374151;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
 }
 
-header h1 {
-    font-size: 2.8rem;
-    margin: 0;
-    color: #2c3e50;
+.tabs button.active{
+    background:#2563eb;
 }
 
-header p {
-    font-size: 1.15rem;
-    margin: 8px 0;
-    color: #4b5563;
+.content{
+    max-width:1600px;
+    margin:auto;
+    padding:20px;
 }
 
-/* === Section Rapports === */
-.section {
-    margin: 30px 0;
-    padding: 0 20px;
-    text-align: center;
+iframe{
+    width:100%;
+    height:80vh;
+    border:none;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    display:none;
 }
 
-.section h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 0px 0px 8px rgba(0,0,0,0.4);
+iframe.active{
+    display:block;
 }
 
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 15px;
+footer{
+    text-align:center;
+    padding:25px;
+    font-size:13px;
+    color:#777;
 }
-
-.card {
-    background: #ffffff;
-    width: 300px;
-    padding: 22px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.card h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: #2563eb;
-}
-
-.card p {
-    margin-top: 8px;
-    font-size: 1rem;
-    color: #4b5563;
-}
-
-/* === Rapport Section === */
-#rapportSection {
-    display: none;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-#rapportIframe {
-    width: 95%;
-    height: 75vh;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-/* === Bouton Retour === */
-#backButton {
-    margin-top: 18px;
-    padding: 12px 26px;
-    font-size: 1.1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#backButton:hover {
-    background-color: #1b4ed6;
-}
-
-/* === Contacts Utiles === */
-.contacts {
-    background: rgba(255,255,255,0.9);
-    padding: 28px 22px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 30px auto 50px;
-    border: 1px solid #d1d5db;
-}
-
-.contacts h2 {
-    text-align: center;
-    color: #2563eb;
-    font-size: 1.9rem;
-    margin-bottom: 18px;
-}
-
-.contact-grid {
-    display: grid;
-    gap: 18px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.contact-card {
-    padding: 18px;
-    border-radius: 10px;
-    background: #f9fafb;
-    border: 1px solid #d1d5db;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
-}
-
-.contact-country {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #1f2937;
-}
-
-.contact-person {
-    margin-top: 6px;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.contact-person a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-}
-.contact-person a:hover {
-    text-decoration: underline;
-}
-
-/* === Responsive === */
-@media (max-width: 768px) {
-    header h1 { font-size: 2.4rem; }
-    .section h2 { font-size: 1.8rem; }
-    .cards-container { gap: 15px; }
-}
-
 </style>
-
 </head>
+
 <body>
 
-<!-- Date & Heure -->
-<div id="dateTimeDisplay">📅 -- / -- / ---- ⏰ -- : -- : --</div>
-
 <header>
-    <h1>Bienvenu sur le Portail SÛRETÉ SITARAIL</h1>
-    <p>Choisissez un rapport ou consultez les contacts utiles</p>
+<h1>🚂 Portail Centralisé Sûreté SITARAIL</h1>
+<p>CI & BF – Rapports Power BI</p>
 </header>
 
+<div class="tabs">
+<button class="active" onclick="showReport('r1',this)">⚠️ Niveau d'Alerte</button>
+<button onclick="showReport('r2',this)">📊 Sûreté CI & BF</button>
+<button onclick="showReport('r3',this)">📹 CCTV</button>
+<button onclick="showReport('r4',this)">📋 Relevés Quipux</button>
+</div>
 
-<!-- Section d'accueil (Rapports + Contacts) -->
-<div id="homeContent">
+<div class="content">
 
-    <!-- Section Rapports -->
-    <div class="section">
-        <h2>📊 Nos Rapports</h2>
-        <div class="cards-container">
-            <div class="card" onclick="chargerRapport('niveauAlerte')">
-                <h3>Niveau d’Alerte</h3>
-                <p>Suivi du niveau d’alerte en temps réel</p>
-            </div>
+<!-- Remplace les liens par tes liens PUBLISH TO WEB (view?r=...) -->
 
-            <div class="card" onclick="chargerRapport('tableauDeBord')">
-                <h3>Tableau de bord Sûreté</h3>
-                <p>Analyse des indicateurs de sûreté du réseau</p>
-            </div>
+<iframe id="r1" class="active"
+src="COLLE_LIEN_VIEW_R_1"
+allowfullscreen></iframe>
 
-            <div class="card" onclick="chargerRapport('videosurveillance')">
-                <h3>Vidéosurveillance CCTV</h3>
-                <p>Rapport vidéosurveillance du réseau</p>
-            </div>
-        </div>
-    </div>
+<iframe id="r2"
+src="COLLE_LIEN_VIEW_R_2"
+allowfullscreen></iframe>
 
-    <!-- Section Contacts -->
-    <div class="contacts">
-        <h2>📞 Contacts Utiles</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-country">🇨🇮v Côte d’Ivoire</div>
-                <div class="contact-person">
-                    <strong>M. Yoro Louis</strong><br>
-                    Chef Division Sûreté<br>
-                    📞 <a href="tel:+2250747974398">07 47 97 43 98</a><br>
-                    📧 <a href="mailto:tchessiehi.yoro@sitarail.com">tchessiehi.yoro@sitarail.com</a>
-                </div>
-            </div>
+<iframe id="r3"
+src="COLLE_LIEN_VIEW_R_3"
+allowfullscreen></iframe>
 
-            <div class="contact-card">
-                <div class="contact-country">🇧🇫a Burkina Faso</div>
-                <div class="contact-person">
-                    <strong>M. Sorgho Ousmane</strong><br>
-                    Chef Division Sûreté<br>
-                    📞 <a href="tel:+22676560431">+226 76 56 04 31</a><br>
-                    📧 <a href="mailto:ousmane.sorgho@sitarail.com">ousmane.sorgho@sitarail.com</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<iframe id="r4"
+src="COLLE_LIEN_VIEW_R_4"
+allowfullscreen></iframe>
 
 </div>
 
-<!-- Section Rapport affiché -->
-<div id="rapportSection" style="display:none; text-align:center; padding-top:20px;">
-    <iframe id="rapportIframe" src="" allowfullscreen></iframe><br><br>
-    <button id="backButton" onclick="retourAccueil()">← Retour à l’Accueil</button>
-</div>
+<footer>
+© 2026 SITARAIL – Portail Sûreté
+</footer>
 
 <script>
-// 📌 Données des rapports
-const rapports = {
-    niveauAlerte: "https://app.powerbi.com/reportEmbed?reportId=adefadca-8e38-4a01-a128-daf86f4e1d09&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    tableauDeBord: "https://app.powerbi.com/reportEmbed?reportId=9c2c69db-1446-4017-b957-a454469f9b86&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb",
-    videosurveillance: "https://app.powerbi.com/reportEmbed?reportId=ab84c6e7-f63f-44b0-a8da-3bbdb72aa213&autoAuth=true&ctid=088e9b00-ffd0-458e-bfa1-acf4c596d3cb"
-};
+function showReport(id,btn){
 
-// 📍 Affiche le rapport dans l'iframe
-function chargerRapport(key) {
-    document.getElementById("homeContent").style.display = "none";
-    document.getElementById("rapportSection").style.display = "block";
-    document.getElementById("rapportIframe").src = rapports[key];
+document.querySelectorAll("iframe")
+.forEach(f=>f.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".tabs button")
+.forEach(b=>b.classList.remove("active"));
+
+btn.classList.add("active");
 }
-
-// 📍 Retour à l'accueil
-function retourAccueil() {
-    document.getElementById("rapportSection").style.display = "none";
-    document.getElementById("homeContent").style.display = "block";
-    document.getElementById("rapportIframe").src = "";
-}
-
-// 📅 Affiche date & heure → mise à jour chaque seconde
-function updateDateTime() {
-    const now = new Date();
-    const date = now.toLocaleDateString("fr-FR");²
-    const time = now.toLocaleTimeString("fr-FR");
-    document.getElementById("dateTimeDisplay").innerText = `📅 ${date} ⏰ ${time}`;
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
 </script>
 
 </body>
